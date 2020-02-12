@@ -1,4 +1,4 @@
-module anypay
+module github.com/pvr1/anypay
 
 go 1.13
 

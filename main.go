@@ -12,7 +12,7 @@ package main
 import (
 	"log"
 	"net/http"
-    "anypay/swagger"
+    "github.com/pvr1/anypay/swagger"
 
 	// WARNING!
 	// Change this to a fully-qualified import path
