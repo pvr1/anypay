@@ -6,7 +6,8 @@ ADD ./ /go/src/github.com/pvr1/anypay
  
 #RUN  apt-get install bash
 RUN go get -u github.com/pvr1/anypay
- 
+RUN go get github.com/kardianos/govendor
+
 RUN set -ex && \
  cd /go/src/github.com/pvr1/anypay && \
   CGO_ENABLED=0 govendor init && \
