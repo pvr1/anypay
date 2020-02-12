@@ -11,6 +11,7 @@ package swagger
 
 import (
 	"net/http"
+    "fmt"
 )
 
 func AddAccount(w http.ResponseWriter, r *http.Request) {
@@ -21,6 +22,7 @@ func AddAccount(w http.ResponseWriter, r *http.Request) {
 func GetAccount(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+    fmt.Fprintf(w, "There you got your Accounts")
 }
 
 func GetAccounts(w http.ResponseWriter, r *http.Request) {
