@@ -49,6 +49,13 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 var routes = Routes{
 	Route{
+		"Openapi",
+		"GET",
+		"/.ambassador-internal/openapi-docs",
+		Openapi,
+	},
+
+	Route{
 		"Index",
 		"GET",
 		"/anypay/v1/",

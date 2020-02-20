@@ -22,7 +22,8 @@ FROM alpine:3.10.2
  
 # Retrieve the binary from the previous stage
 COPY --from=builder /usr/bin/anypay /usr/local/bin/anypay
- 
+COPY ./openapi.yaml /
+
 # Set the binary as the entrypoint of the container
 EXPOSE 8080/tcp
 ENTRYPOINT [ "anypay" ]
