@@ -1,1 +1,775 @@
-{"components":{"schemas":{"Account":{"properties":{"accountId":{"type":"string"},"accountType":{"type":"string"},"name":{"type":"string"},"purpose":{"type":"string"},"user":{"$ref":"#/components/schemas/User"}},"required":["name","accountType"],"type":"object","xml":{"name":"Account"}},"Fxorder":{"properties":{"FX":{"format":"int64","type":"integer"},"account":{"$ref":"#/components/schemas/Account"},"complete":{"default":false,"type":"boolean"},"id":{"format":"int64","type":"integer"},"orderDate":{"format":"date-time","type":"string"},"quantity":{"format":"int32","type":"integer"},"settlementDate":{"format":"date-time","type":"string"},"status":{"description":"Order Status","enum":["onMarket","notApproved","matched"],"type":"string"}},"type":"object","xml":{"name":"Fxorder"}},"Payment":{"properties":{"currency":{"type":"string"},"fromAccountId":{"type":"integer"},"name":{"type":"string"},"paymentId":{"type":"string"},"purpose":{"type":"string"},"toAccountId":{"type":"integer"},"value":{"type":"number"}},"required":["name","fromAccountId","toAccountId","value","currency"],"type":"object","xml":{"name":"Payment"}},"Transaction":{"properties":{"account":{"$ref":"#/components/schemas/Account"},"currency":{"type":"string"},"name":{"type":"string"},"purpose":{"type":"string"},"transactionId":{"type":"string"},"value":{"type":"number"}},"type":"object","xml":{"name":"Transaction"}},"User":{"properties":{"email":{"type":"string"},"firstName":{"type":"string"},"id":{"format":"int64","type":"integer"},"lastName":{"type":"string"},"phone":{"type":"string"},"socialSecuityNumber":{"type":"string"},"userStatus":{"description":"User Status","format":"int32","type":"integer"},"username":{"type":"string"}},"type":"object","xml":{"name":"User"}}}},"externalDocs":{"description":"Find out more about Swedbank an th AnyPay service from a local office or call +46 8 5859000","url":"http://swebank.com"},"info":{"contact":{"email":"pr.von.rosen@swedbank.com"},"description":"This the AnyPay service targeted towards, parents with children doing payments and russian oligarks","title":"AnyPay","version":"1.0.0"},"openapi":"3.0.0","paths":{"/accounts":{"get":{"description":"GET to get list of possible accounts","operationId":"getAccounts","responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"Account not found"}},"summary":"Get all accounts ids that the login has privileges to get","tags":["accounts"]},"post":{"description":"POST to create a new account","operationId":"addAccount","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Account"}},"application/xml":{"schema":{"$ref":"#/components/schemas/Account"}}},"description":"Use the account payload to create an account","required":true},"responses":{"405":{"description":"Invalid input"}},"summary":"Add a new account","tags":["accounts"]},"put":{"description":"PUT to update an existing account","operationId":"updateAccount","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Account"}},"application/xml":{"schema":{"$ref":"#/components/schemas/Account"}}},"description":"Use the account fragment you want to update from the account payload","required":true},"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"Account not found"},"405":{"description":"Validation exception"}},"summary":"Update an existing account","tags":["accounts"]}},"/accounts/{accountId}":{"get":{"description":"GET to retrieve a specific account","operationId":"getAccount","parameters":[{"description":"Id of account to return","in":"path","name":"accountId","required":true,"schema":{"format":"int64","type":"integer"}}],"responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"Account not found"}},"summary":"Get a specific account with details","tags":["accounts"]}},"/fxorder":{"get":{"description":"GET to get list of possible FX orders","operationId":"getFxorder","responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"FX order not found"}},"summary":"Get all non-matched FX orders that the login has privileges to get","tags":["fxorders"]},"post":{"description":"POST to create a new FX order","operationId":"addFxorder","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Fxorder"}},"application/xml":{"schema":{"$ref":"#/components/schemas/Fxorder"}}},"description":"Use the fxorder payload to create a FX order","required":true},"responses":{"405":{"description":"Invalid input"}},"summary":"Add a new Foreig Exchange order","tags":["fxorders"]},"put":{"description":"PUT to update an existing FX order","operationId":"updateFxorder","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Fxorder"}},"application/xml":{"schema":{"$ref":"#/components/schemas/Fxorder"}}},"description":"Use the FX order fragment you want to update from the fxorder payload","required":true},"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"FX order not found"},"405":{"description":"Validation exception"}},"summary":"Update a existing  FX order not matched yet, on the market place","tags":["fxorders"]}},"/fxorder/{fxorderId}":{"delete":{"description":"","operationId":"deleteFxorder","parameters":[{"description":"FX-order to delete","in":"path","name":"fxorderId","required":true,"schema":{"format":"int64","type":"integer"}}],"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"FX-order not found"}},"summary":"Deletes a payment-instruction not settled yet","tags":["fxorders"]},"get":{"description":"GET to retrieve a specific FX-order","operationId":"getFxorder2","parameters":[{"description":"ID of FX-order to return","in":"path","name":"fxorderId","required":true,"schema":{"format":"int64","type":"integer"}}],"responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"FX-order not found"}},"summary":"Get a specific foreign exchange order (FX order) with details","tags":["fxorders"]}},"/payments":{"get":{"description":"GET to get list of possible PAYMENTS","operationId":"getPayments","responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"Payment not found"}},"summary":"Get all non-settled payment-instructions ids that the login has privileges to get","tags":["payments"]},"post":{"description":"POST to create a new payment-instruction","operationId":"addPayment","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Payment"}},"application/xml":{"schema":{"$ref":"#/components/schemas/Payment"}}},"description":"Use the payment payload to create a payment-instruction","required":true},"responses":{"405":{"description":"Invalid input"}},"summary":"Add a new payment","tags":["payments"]},"put":{"description":"PUT to update an existing payment-instruction","operationId":"updatePayment","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Payment"}},"application/xml":{"schema":{"$ref":"#/components/schemas/Payment"}}},"description":"Use the PAYMENT fragment you want to update from the payment payload","required":true},"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"Payment not found"},"405":{"description":"Validation exception"}},"summary":"Update an existing payment-instruction not settled yet","tags":["payments"]}},"/payments/{paymentId}":{"delete":{"description":"","operationId":"deletePayment","parameters":[{"description":"Payment id to delete","in":"path","name":"paymentId","required":true,"schema":{"format":"int64","type":"integer"}}],"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"Payment not found"}},"summary":"Deletes a payment-instruction not settled yet","tags":["payments"]},"get":{"description":"GET to retrieve a specific PAYMENT","operationId":"getPayment","parameters":[{"description":"ID of payment to return","in":"path","name":"paymentId","required":true,"schema":{"format":"int64","type":"integer"}}],"responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"Account not found"}},"summary":"Get a specific payment-instruction with details","tags":["payments"]}},"/transactions":{"get":{"description":"GET to collection of transactions","operationId":"getTransactins","parameters":[{"description":"ID of transaction to return","in":"query","name":"transactionId","required":false,"schema":{"format":"int64","type":"integer"}},{"description":"ID of account to filter on","in":"query","name":"accountId","required":true,"schema":{"format":"int64","type":"integer"}}],"responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"Transactions not found"}},"summary":"Get a collection of transactions","tags":["transactions"]}},"/user":{"get":{"description":"GET to get list of possible users","operationId":"getUses","responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"User not found"}},"summary":"Get all user ids that the login has privileges to get","tags":["users"]},"post":{"description":"POST to create a new user","operationId":"addUser","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}},"application/xml":{"schema":{"$ref":"#/components/schemas/User"}}},"description":"Use the account payload to create an user","required":true},"responses":{"405":{"description":"Invalid input"}},"summary":"Add a new user","tags":["users"]},"put":{"description":"PUT to update an existing user","operationId":"updateUser","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}},"application/xml":{"schema":{"$ref":"#/components/schemas/User"}}},"description":"Use the user fragment you want to update from the user payload","required":true},"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"User not found"},"405":{"description":"Validation exception"}},"summary":"Update an existing user","tags":["users"]}},"/users/{userId}":{"get":{"description":"GET to retrieve a specific use","operationId":"getUser","parameters":[{"description":"Id of user to return","in":"path","name":"userId","required":true,"schema":{"format":"int64","type":"integer"}}],"responses":{"200":{"description":"successful operation"},"400":{"description":"Invalid ID supplied"},"404":{"description":"User not found"}},"summary":"Get a specific user with details","tags":["users"]}}},"servers":[{"url":"https://api.swedbank.net/anypay/v1"}],"tags":[{"description":"Everything about your AnyPay payments","externalDocs":{"description":"Find out more here!! And change to proper URL","url":"http://api.swedbank.net/docs/anypay"},"name":"accounts"}]}
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "This the AnyPay service targeted towards, parents with children doing payments and russian oligarks",
+      "version": "1.0.0",
+      "title": "AnyPay",
+      "contact": {
+        "email": "per.von.rosen@swedbank.com"
+      }
+    },
+    "tags": [
+      {
+        "name": "accounts",
+        "description": "Everything about your AnyPay payments",
+        "externalDocs": {
+          "description": "Find out more here!! And change to proper URL",
+          "url": "http://api.swedbank.net/docs/anypay"
+        }
+      }
+    ],
+    "paths": {
+      "/accounts": {
+        "post": {
+          "tags": [
+            "accounts"
+          ],
+          "summary": "Add a new account",
+          "description": "POST to create a new account",
+          "operationId": "addAccount",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            },
+            "description": "Use the account payload to create an account",
+            "required": true
+          },
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "accounts"
+          ],
+          "summary": "Update an existing account",
+          "description": "PUT to update an existing account",
+          "operationId": "updateAccount",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            },
+            "description": "Use the account fragment you want to update from the account payload",
+            "required": true
+          },
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Account not found"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "accounts"
+          ],
+          "summary": "Get all accounts ids that the login has privileges to get",
+          "description": "GET to get list of possible accounts",
+          "operationId": "getAccounts",
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Account not found"
+            }
+          }
+        }
+      },
+      "/accounts/{accountId}": {
+        "get": {
+          "tags": [
+            "accounts"
+          ],
+          "summary": "Get a specific account with details",
+          "description": "GET to retrieve a specific account",
+          "operationId": "getAccount",
+          "parameters": [
+            {
+              "name": "accountId",
+              "in": "path",
+              "description": "Id of account to return",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Account not found"
+            }
+          }
+        }
+      },
+      "/payments": {
+        "post": {
+          "tags": [
+            "payments"
+          ],
+          "summary": "Add a new payment",
+          "description": "POST to create a new payment-instruction",
+          "operationId": "addPayment",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              }
+            },
+            "description": "Use the payment payload to create a payment-instruction",
+            "required": true
+          },
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "payments"
+          ],
+          "summary": "Update an existing payment-instruction not settled yet",
+          "description": "PUT to update an existing payment-instruction",
+          "operationId": "updatePayment",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              }
+            },
+            "description": "Use the PAYMENT fragment you want to update from the payment payload",
+            "required": true
+          },
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Payment not found"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "payments"
+          ],
+          "summary": "Get all non-settled payment-instructions ids that the login has privileges to get",
+          "description": "GET to get list of possible PAYMENTS",
+          "operationId": "getPayments",
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Payment not found"
+            }
+          }
+        }
+      },
+      "/payments/{paymentId}": {
+        "get": {
+          "tags": [
+            "payments"
+          ],
+          "summary": "Get a specific payment-instruction with details",
+          "description": "GET to retrieve a specific PAYMENT",
+          "operationId": "getPayment",
+          "parameters": [
+            {
+              "name": "paymentId",
+              "in": "path",
+              "description": "ID of payment to return",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Account not found"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "payments"
+          ],
+          "summary": "Deletes a payment-instruction not settled yet",
+          "description": "",
+          "operationId": "deletePayment",
+          "parameters": [
+            {
+              "name": "paymentId",
+              "in": "path",
+              "description": "Payment id to delete",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Payment not found"
+            }
+          }
+        }
+      },
+      "/transactions": {
+        "get": {
+          "tags": [
+            "transactions"
+          ],
+          "summary": "Get a collection of transactions",
+          "description": "GET to collection of transactions",
+          "operationId": "getTransactins",
+          "parameters": [
+            {
+              "name": "transactionId",
+              "in": "query",
+              "description": "ID of transaction to return",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            {
+              "name": "accountId",
+              "in": "query",
+              "description": "ID of account to filter on",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Transactions not found"
+            }
+          }
+        }
+      },
+      "/fxorder": {
+        "post": {
+          "tags": [
+            "fxorders"
+          ],
+          "summary": "Add a new Foreig Exchange order",
+          "description": "POST to create a new FX order",
+          "operationId": "addFxorder",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fxorder"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fxorder"
+                }
+              }
+            },
+            "description": "Use the fxorder payload to create a FX order",
+            "required": true
+          },
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "fxorders"
+          ],
+          "summary": "Update a existing  FX order not matched yet, on the market place",
+          "description": "PUT to update an existing FX order",
+          "operationId": "updateFxorder",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fxorder"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fxorder"
+                }
+              }
+            },
+            "description": "Use the FX order fragment you want to update from the fxorder payload",
+            "required": true
+          },
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "FX order not found"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "fxorders"
+          ],
+          "summary": "Get all non-matched FX orders that the login has privileges to get",
+          "description": "GET to get list of possible FX orders",
+          "operationId": "getFxorder",
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "FX order not found"
+            }
+          }
+        }
+      },
+      "/fxorder/{fxorderId}": {
+        "get": {
+          "tags": [
+            "fxorders"
+          ],
+          "summary": "Get a specific foreign exchange order (FX order) with details",
+          "description": "GET to retrieve a specific FX-order",
+          "operationId": "getFxorder2",
+          "parameters": [
+            {
+              "name": "fxorderId",
+              "in": "path",
+              "description": "ID of FX-order to return",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "FX-order not found"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "fxorders"
+          ],
+          "summary": "Deletes a payment-instruction not settled yet",
+          "description": "",
+          "operationId": "deleteFxorder",
+          "parameters": [
+            {
+              "name": "fxorderId",
+              "in": "path",
+              "description": "FX-order to delete",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "FX-order not found"
+            }
+          }
+        }
+      },
+      "/user": {
+        "post": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Add a new user",
+          "description": "POST to create a new user",
+          "operationId": "addUser",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "Use the account payload to create an user",
+            "required": true
+          },
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Update an existing user",
+          "description": "PUT to update an existing user",
+          "operationId": "updateUser",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "Use the user fragment you want to update from the user payload",
+            "required": true
+          },
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "User not found"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Get all user ids that the login has privileges to get",
+          "description": "GET to get list of possible users",
+          "operationId": "getUses",
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "User not found"
+            }
+          }
+        }
+      },
+      "/users/{userId}": {
+        "get": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Get a specific user with details",
+          "description": "GET to retrieve a specific use",
+          "operationId": "getUser",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "description": "Id of user to return",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "User not found"
+            }
+          }
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swedbank an th AnyPay service from a local office or call +46 8 5859000",
+      "url": "http://swebank.com"
+    },
+    "servers": [
+      {
+        "url": "https://api.swedbank.net/anypay/v1"
+      }
+    ],
+    "components": {
+      "schemas": {
+        "Fxorder": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "FX": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "account": {
+              "$ref": "#/components/schemas/Account"
+            },
+            "quantity": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "orderDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "settlementDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "status": {
+              "type": "string",
+              "description": "Order Status",
+              "enum": [
+                "onMarket",
+                "notApproved",
+                "matched"
+              ]
+            },
+            "complete": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "xml": {
+            "name": "Fxorder"
+          }
+        },
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "username": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "socialSecuityNumber": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "userStatus": {
+              "type": "integer",
+              "format": "int32",
+              "description": "User Status"
+            }
+          },
+          "xml": {
+            "name": "User"
+          }
+        },
+        "Account": {
+          "type": "object",
+          "required": [
+            "name",
+            "accountType"
+          ],
+          "properties": {
+            "accountId": {
+              "type": "string"
+            },
+            "user": {
+              "$ref": "#/components/schemas/User"
+            },
+            "name": {
+              "type": "string"
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "accountType": {
+              "type": "string"
+            }
+          },
+          "xml": {
+            "name": "Account"
+          }
+        },
+        "Payment": {
+          "type": "object",
+          "required": [
+            "name",
+            "fromAccountId",
+            "toAccountId",
+            "value",
+            "currency"
+          ],
+          "properties": {
+            "paymentId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "fromAccountId": {
+              "type": "integer"
+            },
+            "toAccountId": {
+              "type": "integer"
+            },
+            "value": {
+              "type": "number"
+            },
+            "currency": {
+              "type": "string"
+            }
+          },
+          "xml": {
+            "name": "Payment"
+          }
+        },
+        "Transaction": {
+          "type": "object",
+          "properties": {
+            "transactionId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "account": {
+              "$ref": "#/components/schemas/Account"
+            },
+            "value": {
+              "type": "number"
+            },
+            "currency": {
+              "type": "string"
+            }
+          },
+          "xml": {
+            "name": "Transaction"
+          }
+        }
+      }
+    }
+  }
