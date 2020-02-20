@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   title: AnyPay
   contact:
-    email: pr.von.rosen@swedbank.com
+    email: per.von.rosen@swedbank.com
 tags:
   - name: accounts
     description: Everything about your AnyPay payments
@@ -403,6 +403,32 @@ paths:
         404:
           description: "User not found"
 
+  /openapi/json:
+    get: 
+      tags:   
+        - openapi
+      summary: Get OpenAPI 3.0 JSON 
+      description: Get OpenAPI 3.0 JSON-file
+      operationId: OpenAPI
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "File not found"
+
+  /openapi/yaml:
+    get: 
+      tags:   
+        - openapi
+      summary: Get OpenAPI 3.0 YAML 
+      description: Get OpenAPI 3.0 YAML-file
+      operationId: OpenAPI
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "File not found"
+                
 externalDocs:
   description: Find out more about Swedbank an th AnyPay service from a local office or call +46 8 5859000
   url: http://swebank.com

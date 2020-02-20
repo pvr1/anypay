@@ -49,10 +49,24 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 var routes = Routes{
 	Route{
-		"Openapi",
+		"ambassador_openapi",
 		"GET",
 		"/.ambassador-internal/openapi-docs",
-		Openapi,
+		Openapi_json,
+	},
+
+	Route{
+		"Openapi",
+		"GET",
+		"/openapi/yaml",
+		Openapi_yaml,
+	},
+
+	Route{
+		"Openapi",
+		"GET",
+		"/openapi/json",
+		Openapi_json,
 	},
 
 	Route{
