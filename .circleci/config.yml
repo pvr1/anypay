@@ -23,6 +23,6 @@ jobs:
 
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
-      # - setup_remote_docker
-      # - run: docker build -t pervonrosen/anypay:latest .
-      #  - run: docker push 
+      - setup_remote_docker
+      - run: docker build -t pervonrosen/anypay:latest -f Dockerfile.circleci .
+      - run: docker push 
