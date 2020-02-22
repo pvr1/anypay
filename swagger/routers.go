@@ -175,10 +175,17 @@ var routes = Routes{
 	},
 
 	Route{
-		"GetTransactins",
+		"GetTransactions",
 		strings.ToUpper("Get"),
 		"/anypay/v1/transactions",
-		GetTransactins,
+		GetTransactions,
+	},
+
+	Route{
+		"GetTransaction",
+		strings.ToUpper("Get"),
+		"/anypay/v1/transactions/{transactionId}",
+		GetTransaction,
 	},
 
 	Route{
@@ -198,7 +205,7 @@ var routes = Routes{
 	Route{
 		"GetUsers",
 		strings.ToUpper("Get"),
-		"/anypay/v1/user",
+		"/anypay/v1/users",
 		GetUsers,
 	},
 

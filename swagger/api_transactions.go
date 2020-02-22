@@ -10,12 +10,18 @@
 package swagger
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
-func GetTransactins(w http.ResponseWriter, r *http.Request) {
+func GetTransactions(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Get list of Transactions originating from FX Orders and Payments\n")
+}
+
+func GetTransaction(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "There you got your specific Account\n")
 }
