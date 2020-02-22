@@ -51,9 +51,9 @@ func NewRouter() *mux.Router {
  */
 func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "\nThis is the AnyPayAPI complying to the OpenAPI3.0 specification\n\n")
-	fmt.Fprintf(w, "The endpoints for the JSON file is:\n")
+	fmt.Fprintf(w, "The endpoint for the JSON file is:\n")
 	fmt.Fprintf(w, "/anypay/v1/openapi/json\n\n")
-	fmt.Fprintf(w, "The endpoints for the Yaml file is:\n")
+	fmt.Fprintf(w, "The endpoint for the Yaml file is:\n")
 	fmt.Fprintf(w, "/anypay/v1/openapi/yaml\n")
 
 }
