@@ -58,7 +58,7 @@ var routes = Routes{
 		"ambassador_openapi",
 		"GET",
 		"/.ambassador-internal/openapi-docs",
-		Openapi_json,
+		OpenapiJSON,
 	},
 
 	Route{
