@@ -28,5 +28,5 @@ func GetTransactions(w http.ResponseWriter, r *http.Request) {
 func GetTransaction(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "There you got your specific Account\n")
+	fmt.Fprintf(w, "There you got your specific transaction\n")
 }
