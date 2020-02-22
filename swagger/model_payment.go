@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -9,17 +10,17 @@
  */
 package swagger
 
+/*Payment - a struct holding the Payment data necessary to IDentify and create a Payment*/
 type Payment struct {
-
-	PaymentId string `json:"paymentId,omitempty"`
+	PaymentID string `json:"paymentID,omitempty"`
 
 	Name string `json:"name"`
 
 	Purpose string `json:"purpose,omitempty"`
 
-	FromAccountId int32 `json:"fromAccountId"`
+	FromAccountID int32 `json:"fromAccountID"`
 
-	ToAccountId int32 `json:"toAccountId"`
+	ToAccountID int32 `json:"toAccountID"`
 
 	Value *float64 `json:"value"`
 

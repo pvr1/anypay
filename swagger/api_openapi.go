@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -16,8 +17,8 @@ import (
 	"os"
 )
 
-/* Openapi_yaml - here we can retrieve the openapi3.0 aka "swagger file" for auto-provision*/
-func Openapi_yaml(w http.ResponseWriter, r *http.Request) {
+/*OpenapiYaml - here we can retrieve the openapi3.0 aka "swagger file" for auto-provision*/
+func OpenapiYaml(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/yaml; charset=UTF-8")
 	file, err := os.Open("/openapi.yaml")
 	defer file.Close()
@@ -38,8 +39,8 @@ func Openapi_yaml(w http.ResponseWriter, r *http.Request) {
 
 }
 
-/* Openapi_json - here we can retrieve the openapi3.0 aka "swagger file" for auto-provision*/
-func Openapi_json(w http.ResponseWriter, r *http.Request) {
+/*OpenapiJSON - here we can retrieve the openapi3.0 aka "swagger file" for auto-provision*/
+func OpenapiJSON(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	file, err := os.Open("/openapi.json")
 	defer file.Close()

@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -10,34 +11,44 @@
 package swagger
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
+/*AddFxorder function used to add FX Order
+ */
 func AddFxorder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "FX Order place on market place\n")
 }
 
+/*DeleteFxorder function used to delete FX Order
+ */
 func DeleteFxorder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "FX Order deleted. You were so close...\n")
 }
 
+/*GetFxorders function used to GET FX Orders
+ */
 func GetFxorders(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Get FX Order list. Offer:100MM EUR/SEK @ 10.53 , Bid:100MM EUR/SEK @ 10.51 . \n")
+	fmt.Fprintf(w, "Get FX Order list. Offer:100MM EUR/SEK @ 10.53 , BID:100MM EUR/SEK @ 10.51 . \n")
 }
 
+/*GetFxorder function used to GET FX Order
+ */
 func GetFxorder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Get specific FX Order status. You are best offer: 100MM EUR/SEK @ 10.53 . \n")
 }
 
+/*UpdateFxorder function used to update FX Order
+ */
 func UpdateFxorder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)

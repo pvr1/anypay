@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -10,28 +11,36 @@
 package swagger
 
 import (
+	"fmt"
 	"net/http"
-    "fmt"
 )
 
+/*AddAccount function used to add Accounts
+ */
 func AddAccount(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Account added\n")
 }
 
+/*GetAccount function used to GET Account
+ */
 func GetAccount(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-    fmt.Fprintf(w, "There you got your specific Account\n")
+	fmt.Fprintf(w, "There you got your specific Account\n")
 }
 
+/*GetAccounts function used to GET Accounts
+ */
 func GetAccounts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Yep. A list of accounts was delivered. Can you see it?? :-)\n")
 }
 
+/*UpdateAccount function used to update Accounts
+ */
 func UpdateAccount(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)

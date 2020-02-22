@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -9,9 +10,11 @@
  */
 package swagger
 
+/*Transaction - a struct holding the Transaction data necessary to IDentify and return a Transaction
+ *A Transaction is created after an Order has been executed. Order can be of type FX Order or Payment
+ */
 type Transaction struct {
-
-	TransactionId string `json:"transactionId,omitempty"`
+	TransactionID string `json:"transactionID,omitempty"`
 
 	Name string `json:"name,omitempty"`
 

@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -10,23 +11,25 @@
 package swagger
 
 import (
-    "log"
-    "net/http"
-    "time"
+	"log"
+	"net/http"
+	"time"
 )
 
+/*Logger function used to log a logentry, e.g. an error
+ */
 func Logger(inner http.Handler, name string) http.Handler {
-    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        start := time.Now()
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
 
-        inner.ServeHTTP(w, r)
+		inner.ServeHTTP(w, r)
 
-        log.Printf(
-            "%s %s %s %s",
-            r.Method,
-            r.RequestURI,
-            name,
-            time.Since(start),
-        )
-    })
+		log.Printf(
+			"%s %s %s %s",
+			r.Method,
+			r.RequestURI,
+			name,
+			time.Since(start),
+		)
+	})
 }

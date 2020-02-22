@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -17,6 +18,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+/*Route is managing the routes for the API calls to the correct go-functions*/
 type Route struct {
 	Name        string
 	Method      string
@@ -24,8 +26,10 @@ type Route struct {
 	HandlerFunc http.HandlerFunc
 }
 
+/*Routes is a collection of Route*/
 type Routes []Route
 
+/*NewRouter - create a new Route and populate it*/
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
@@ -43,6 +47,8 @@ func NewRouter() *mux.Router {
 	return router
 }
 
+/*Index is the function returning the default response to the request /anypay/v1/
+ */
 func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World!")
 }
@@ -59,14 +65,14 @@ var routes = Routes{
 		"Openapi",
 		"GET",
 		"/openapi/yaml",
-		Openapi_yaml,
+		OpenapiYaml,
 	},
 
 	Route{
 		"Openapi",
 		"GET",
 		"/openapi/json",
-		Openapi_json,
+		OpenapiJSON,
 	},
 
 	Route{
@@ -86,7 +92,7 @@ var routes = Routes{
 	Route{
 		"GetAccount",
 		strings.ToUpper("Get"),
-		"/anypay/v1/accounts/{accountId}",
+		"/anypay/v1/accounts/{accountID}",
 		GetAccount,
 	},
 
@@ -114,7 +120,7 @@ var routes = Routes{
 	Route{
 		"DeleteFxorder",
 		strings.ToUpper("Delete"),
-		"/anypay/v1/fxorder/{fxorderId}",
+		"/anypay/v1/fxorder/{fxorderID}",
 		DeleteFxorder,
 	},
 
@@ -128,7 +134,7 @@ var routes = Routes{
 	Route{
 		"GetFxorder",
 		strings.ToUpper("Get"),
-		"/anypay/v1/fxorder/{fxorderId}",
+		"/anypay/v1/fxorder/{fxorderID}",
 		GetFxorder,
 	},
 
@@ -149,14 +155,14 @@ var routes = Routes{
 	Route{
 		"DeletePayment",
 		strings.ToUpper("Delete"),
-		"/anypay/v1/payments/{paymentId}",
+		"/anypay/v1/payments/{paymentID}",
 		DeletePayment,
 	},
 
 	Route{
 		"GetPayment",
 		strings.ToUpper("Get"),
-		"/anypay/v1/payments/{paymentId}",
+		"/anypay/v1/payments/{paymentID}",
 		GetPayment,
 	},
 
@@ -184,7 +190,7 @@ var routes = Routes{
 	Route{
 		"GetTransaction",
 		strings.ToUpper("Get"),
-		"/anypay/v1/transactions/{transactionId}",
+		"/anypay/v1/transactions/{transactionID}",
 		GetTransaction,
 	},
 
@@ -198,7 +204,7 @@ var routes = Routes{
 	Route{
 		"GetUser",
 		strings.ToUpper("Get"),
-		"/anypay/v1/users/{userId}",
+		"/anypay/v1/users/{userID}",
 		GetUser,
 	},
 

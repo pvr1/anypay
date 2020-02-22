@@ -45,7 +45,7 @@
         },
         "responses": {
           "405": {
-            "description": "Invalid input"
+            "description": "InvalID input"
           }
         }
       },
@@ -74,13 +74,13 @@
         },
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Account not found"
           },
           "405": {
-            "description": "Validation exception"
+            "description": "ValIDation exception"
           }
         }
       },
@@ -88,7 +88,7 @@
         "tags": [
           "accounts"
         ],
-        "summary": "Get all accounts ids that the login has privileges to get",
+        "summary": "Get all accounts IDs that the login has privileges to get",
         "description": "GET to get list of possible accounts",
         "operationId": "getAccounts",
         "responses": {
@@ -96,7 +96,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Account not found"
@@ -104,7 +104,7 @@
         }
       }
     },
-    "/accounts/{accountId}": {
+    "/accounts/{accountID}": {
       "get": {
         "tags": [
           "accounts"
@@ -114,9 +114,9 @@
         "operationId": "getAccount",
         "parameters": [
           {
-            "name": "accountId",
+            "name": "accountID",
             "in": "path",
-            "description": "Id of account to return",
+            "description": "ID of account to return",
             "required": true,
             "schema": {
               "type": "integer",
@@ -129,7 +129,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Account not found"
@@ -163,7 +163,7 @@
         },
         "responses": {
           "405": {
-            "description": "Invalid input"
+            "description": "InvalID input"
           }
         }
       },
@@ -192,13 +192,13 @@
         },
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Payment not found"
           },
           "405": {
-            "description": "Validation exception"
+            "description": "ValIDation exception"
           }
         }
       },
@@ -206,7 +206,7 @@
         "tags": [
           "payments"
         ],
-        "summary": "Get all non-settled payment-instructions ids that the login has privileges to get",
+        "summary": "Get all non-settled payment-instructions IDs that the login has privileges to get",
         "description": "GET to get list of possible PAYMENTS",
         "operationId": "getPayments",
         "responses": {
@@ -214,7 +214,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Payment not found"
@@ -222,7 +222,7 @@
         }
       }
     },
-    "/payments/{paymentId}": {
+    "/payments/{paymentID}": {
       "get": {
         "tags": [
           "payments"
@@ -232,7 +232,7 @@
         "operationId": "getPayment",
         "parameters": [
           {
-            "name": "paymentId",
+            "name": "paymentID",
             "in": "path",
             "description": "ID of payment to return",
             "required": true,
@@ -247,7 +247,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Account not found"
@@ -263,9 +263,9 @@
         "operationId": "deletePayment",
         "parameters": [
           {
-            "name": "paymentId",
+            "name": "paymentID",
             "in": "path",
-            "description": "Payment id to delete",
+            "description": "Payment ID to delete",
             "required": true,
             "schema": {
               "type": "integer",
@@ -275,7 +275,7 @@
         ],
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Payment not found"
@@ -293,7 +293,7 @@
         "operationId": "getTransactions",
         "parameters": [
           {
-            "name": "transactionId",
+            "name": "transactionID",
             "in": "query",
             "description": "ID of transaction to return",
             "required": false,
@@ -303,7 +303,7 @@
             }
           },
           {
-            "name": "accountId",
+            "name": "accountID",
             "in": "query",
             "description": "ID of account to filter on",
             "required": true,
@@ -318,7 +318,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Transactions not found"
@@ -326,7 +326,7 @@
         }
       }
     },
-    "/transactions/{transactionId}": {
+    "/transactions/{transactionID}": {
       "get": {
         "tags": [
           "transactions"
@@ -336,10 +336,10 @@
         "operationId": "getTransaction",
         "parameters": [
           {
-            "name": "transactionId",
-            "in": "query",
+            "name": "transactionID",
+            "in": "path",
             "description": "ID of transaction to return",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -351,7 +351,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "Transaction not found"
@@ -385,7 +385,7 @@
         },
         "responses": {
           "405": {
-            "description": "Invalid input"
+            "description": "InvalID input"
           }
         }
       },
@@ -414,13 +414,13 @@
         },
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "FX order not found"
           },
           "405": {
-            "description": "Validation exception"
+            "description": "ValIDation exception"
           }
         }
       },
@@ -436,7 +436,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "FX order not found"
@@ -444,7 +444,7 @@
         }
       }
     },
-    "/fxorder/{fxorderId}": {
+    "/fxorder/{fxorderID}": {
       "get": {
         "tags": [
           "fxorders"
@@ -454,7 +454,7 @@
         "operationId": "getFxorder2",
         "parameters": [
           {
-            "name": "fxorderId",
+            "name": "fxorderID",
             "in": "path",
             "description": "ID of FX-order to return",
             "required": true,
@@ -469,7 +469,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "FX-order not found"
@@ -485,7 +485,7 @@
         "operationId": "deleteFxorder",
         "parameters": [
           {
-            "name": "fxorderId",
+            "name": "fxorderID",
             "in": "path",
             "description": "FX-order to delete",
             "required": true,
@@ -497,7 +497,7 @@
         ],
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "FX-order not found"
@@ -531,7 +531,7 @@
         },
         "responses": {
           "405": {
-            "description": "Invalid input"
+            "description": "InvalID input"
           }
         }
       },
@@ -560,13 +560,13 @@
         },
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "User not found"
           },
           "405": {
-            "description": "Validation exception"
+            "description": "ValIDation exception"
           }
         }
       },
@@ -574,7 +574,7 @@
         "tags": [
           "users"
         ],
-        "summary": "Get all user ids that the login has privileges to get",
+        "summary": "Get all user IDs that the login has privileges to get",
         "description": "GET to get list of possible users",
         "operationId": "getUses",
         "responses": {
@@ -582,7 +582,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "User not found"
@@ -590,7 +590,7 @@
         }
       }
     },
-    "/users/{userId}": {
+    "/users/{userID}": {
       "get": {
         "tags": [
           "users"
@@ -600,9 +600,9 @@
         "operationId": "getUser",
         "parameters": [
           {
-            "name": "userId",
+            "name": "userID",
             "in": "path",
-            "description": "Id of user to return",
+            "description": "ID of user to return",
             "required": true,
             "schema": {
               "type": "integer",
@@ -615,7 +615,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "InvalID ID supplied"
           },
           "404": {
             "description": "User not found"
@@ -630,7 +630,7 @@
         ],
         "summary": "Get OpenAPI 3.0 JSON",
         "description": "Get OpenAPI 3.0 JSON-file",
-        "operationId": "OpenAPI",
+        "operationId": "OpenAPIjson",
         "responses": {
           "200": {
             "description": "successful operation"
@@ -648,7 +648,7 @@
         ],
         "summary": "Get OpenAPI 3.0 YAML",
         "description": "Get OpenAPI 3.0 YAML-file",
-        "operationId": "OpenAPI",
+        "operationId": "OpenAPIyaml",
         "responses": {
           "200": {
             "description": "successful operation"
@@ -674,7 +674,7 @@
       "Fxorder": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int64"
           },
@@ -718,7 +718,7 @@
       "User": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int64"
           },
@@ -757,7 +757,7 @@
           "accountType"
         ],
         "properties": {
-          "accountId": {
+          "accountID": {
             "type": "string"
           },
           "user": {
@@ -781,13 +781,13 @@
         "type": "object",
         "required": [
           "name",
-          "fromAccountId",
-          "toAccountId",
+          "fromAccountID",
+          "toAccountID",
           "value",
           "currency"
         ],
         "properties": {
-          "paymentId": {
+          "paymentID": {
             "type": "string"
           },
           "name": {
@@ -796,10 +796,10 @@
           "purpose": {
             "type": "string"
           },
-          "fromAccountId": {
+          "fromAccountID": {
             "type": "integer"
           },
-          "toAccountId": {
+          "toAccountID": {
             "type": "integer"
           },
           "value": {
@@ -816,7 +816,7 @@
       "Transaction": {
         "type": "object",
         "properties": {
-          "transactionId": {
+          "transactionID": {
             "type": "string"
           },
           "name": {

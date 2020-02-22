@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -10,34 +11,44 @@
 package swagger
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
+/*AddPayment function used to add a payment order
+ */
 func AddPayment(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Payment order added\n")
 }
 
+/*DeletePayment function used to delete a payment order
+ */
 func DeletePayment(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Payment order deleted\n")
 }
 
+/*GetPayment function used to GET a payment order
+ */
 func GetPayment(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Get specific Payment order\n")
 }
 
+/*GetPayments function used to GET a list of payment orders
+ */
 func GetPayments(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Get list of Payment orders\n")
 }
 
+/*UpdatePayment function used to UPDATE a payment order
+ */
 func UpdatePayment(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)

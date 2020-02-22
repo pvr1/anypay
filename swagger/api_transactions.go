@@ -1,4 +1,5 @@
-/*
+/*Package swagger AnyPay
+ *
  * AnyPay
  *
  * This the AnyPay service targeted towards, parents with children doing payments and russian oligarks
@@ -14,12 +15,16 @@ import (
 	"net/http"
 )
 
+/*GetTransactions function used to GET a list of transactions
+ */
 func GetTransactions(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Get list of Transactions originating from FX Orders and Payments\n")
 }
 
+/*GetTransaction function used to GET a transaction
+ */
 func GetTransaction(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
