@@ -11,6 +11,7 @@ package swagger
 
 import (
 	"net/http"
+	"fmt"
 )
 
 func AddPayment(w http.ResponseWriter, r *http.Request) {

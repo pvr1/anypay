@@ -11,6 +11,7 @@ package swagger
 
 import (
 	"net/http"
+	"fmt"
 )
 
 func GetTransactins(w http.ResponseWriter, r *http.Request) {

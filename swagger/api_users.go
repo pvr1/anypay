@@ -10,6 +10,7 @@
 package swagger
 
 import (
+	"fmt"
 	"net/http"
 )
 
