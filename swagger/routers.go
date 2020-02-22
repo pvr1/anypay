@@ -119,17 +119,17 @@ var routes = Routes{
 	},
 
 	Route{
-		"GetFxorder",
+		"GetFxorders",
 		strings.ToUpper("Get"),
 		"/anypay/v1/fxorder",
-		GetFxorder,
+		GetFxorders,
 	},
 
 	Route{
-		"GetFxorder2",
+		"GetFxorder",
 		strings.ToUpper("Get"),
 		"/anypay/v1/fxorder/{fxorderId}",
-		GetFxorder2,
+		GetFxorder,
 	},
 
 	Route{
@@ -196,10 +196,10 @@ var routes = Routes{
 	},
 
 	Route{
-		"GetUses",
+		"GetUsers",
 		strings.ToUpper("Get"),
 		"/anypay/v1/user",
-		GetUses,
+		GetUsers,
 	},
 
 	Route{

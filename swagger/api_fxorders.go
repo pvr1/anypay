@@ -16,21 +16,25 @@ import (
 func AddFxorder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "FX Order place on market place\n")
 }
 
 func DeleteFxorder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "FX Order deleted. You were so close...\n")
+}
+
+func GetFxorders(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Get FX Order list. Offer:100MM EUR/SEK @ 10.53 , Bid:100MM EUR/SEK @ 10.51 . \n")
 }
 
 func GetFxorder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-}
-
-func GetFxorder2(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Get specific FX Order status. You are best offer: 100MM EUR/SEK @ 10.53 . \n")
 }
 
 func UpdateFxorder(w http.ResponseWriter, r *http.Request) {

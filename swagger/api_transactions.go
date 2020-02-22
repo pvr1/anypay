@@ -16,4 +16,5 @@ import (
 func GetTransactins(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Get list of Transactions originating from FX Orders and Payments\n")
 }

@@ -17,20 +17,23 @@ import (
 func AddAccount(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Account added\n")
 }
 
 func GetAccount(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-    fmt.Fprintf(w, "There you got your Accounts")
+    fmt.Fprintf(w, "There you got your specific Account\n")
 }
 
 func GetAccounts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Yep. A list of accounts was delivered. Can you see it?? :-)\n")
 }
 
 func UpdateAccount(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Account updated. Now it belongs to me.\n")
 }

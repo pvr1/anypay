@@ -323,7 +323,7 @@ paths:
         "404":
           description: FX-order not found
 
-  /user:
+  /users:
     post:
       tags:
         - users
