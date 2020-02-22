@@ -50,7 +50,12 @@ func NewRouter() *mux.Router {
 /*Index is the function returning the default response to the request /anypay/v1/
  */
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
+	fmt.Fprintf(w, "\nThe is the AnyPayAPI complying to the OpenAPI3.0 specification\n\n")
+	fmt.Fprintf(w, "The endpoints for the JSON file is:\n")
+	fmt.Fprintf(w, "/anypay/v1/openapi/JSON\n\n")
+	fmt.Fprintf(w, "The endpoints for the Yaml file is:\n")
+	fmt.Fprintf(w, "/anypay/v1/openapi/Yaml\n")
+
 }
 
 var routes = Routes{
