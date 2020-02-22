@@ -45,7 +45,7 @@
         },
         "responses": {
           "405": {
-            "description": "InvalID input"
+            "description": "Invalid input"
           }
         }
       },
@@ -74,7 +74,7 @@
         },
         "responses": {
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Account not found"
@@ -96,7 +96,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Account not found"
@@ -129,7 +129,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Account not found"
@@ -163,7 +163,7 @@
         },
         "responses": {
           "405": {
-            "description": "InvalID input"
+            "description": "Invalid input"
           }
         }
       },
@@ -192,7 +192,7 @@
         },
         "responses": {
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Payment not found"
@@ -214,7 +214,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Payment not found"
@@ -247,7 +247,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Account not found"
@@ -275,7 +275,7 @@
         ],
         "responses": {
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Payment not found"
@@ -318,7 +318,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Transactions not found"
@@ -351,7 +351,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "Transaction not found"
@@ -385,7 +385,7 @@
         },
         "responses": {
           "405": {
-            "description": "InvalID input"
+            "description": "Invalid input"
           }
         }
       },
@@ -414,7 +414,7 @@
         },
         "responses": {
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "FX order not found"
@@ -436,7 +436,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "FX order not found"
@@ -469,7 +469,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "FX-order not found"
@@ -497,7 +497,7 @@
         ],
         "responses": {
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "FX-order not found"
@@ -531,7 +531,7 @@
         },
         "responses": {
           "405": {
-            "description": "InvalID input"
+            "description": "Invalid input"
           }
         }
       },
@@ -560,7 +560,7 @@
         },
         "responses": {
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "User not found"
@@ -582,7 +582,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "User not found"
@@ -615,7 +615,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "InvalID ID supplied"
+            "description": "Invalid ID supplied"
           },
           "404": {
             "description": "User not found"
