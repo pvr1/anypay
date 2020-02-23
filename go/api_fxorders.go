@@ -38,5 +38,5 @@ func GetFxorder2(c *gin.Context) {
 
 // UpdateFxorder - Update a existing  FX order not matched yet, on the market place
 func UpdateFxorder(c *gin.Context) {
-	c.String(http.StatusOK, gin.H{})
+	c.String(http.StatusOK, "FX Order updated.")
 }

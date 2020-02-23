@@ -1,2 +1,4 @@
-anypay_test.go
 anypay
+.circleci
+.openapi-generator
+.vscode
