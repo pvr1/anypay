@@ -295,7 +295,7 @@ paths:
         - fxorders
       summary: Get all non-matched FX orders that the login has privileges to get
       description: GET to get list of possible FX orders
-      operationId: getFxorder
+      operationId: getFxorders
       responses:
         200:
           description: successful operation
