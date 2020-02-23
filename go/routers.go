@@ -108,35 +108,35 @@ var routes = Routes{
 	{
 		"AddFxorder",
 		http.MethodPost,
-		"/anypay/v1/fxorder",
+		"/anypay/v1/fxorders",
 		AddFxorder,
 	},
 
 	{
 		"DeleteFxorder",
 		http.MethodDelete,
-		"/anypay/v1/fxorder/:fxorderID",
+		"/anypay/v1/fxorders/:fxorderID",
 		DeleteFxorder,
+	},
+
+	{
+		"GetFxorders",
+		http.MethodGet,
+		"/anypay/v1/fxorders",
+		GetFxorder,
 	},
 
 	{
 		"GetFxorder",
 		http.MethodGet,
-		"/anypay/v1/fxorder",
+		"/anypay/v1/fxorders/:fxorderID",
 		GetFxorder,
-	},
-
-	{
-		"GetFxorder2",
-		http.MethodGet,
-		"/anypay/v1/fxorder/:fxorderID",
-		GetFxorder2,
 	},
 
 	{
 		"UpdateFxorder",
 		http.MethodPut,
-		"/anypay/v1/fxorder",
+		"/anypay/v1/fxorders",
 		UpdateFxorder,
 	},
 

@@ -26,13 +26,13 @@ func DeleteFxorder(c *gin.Context) {
 	c.String(http.StatusOK, "FX Order deleted. You were so close...\n")
 }
 
-// GetFxorder - Get all non-matched FX orders that the login has privileges to get
-func GetFxorder(c *gin.Context) {
+// GetFxorders - Get all non-matched FX orders that the login has privileges to get
+func GetFxorders(c *gin.Context) {
 	c.String(http.StatusOK, "Get FX Order list. Offer:100MM EUR/SEK @ 10.53 , BID:100MM EUR/SEK @ 10.51 . \n")
 }
 
-// GetFxorder2 - Get a specific foreign exchange order (FX order) with details
-func GetFxorder2(c *gin.Context) {
+// GetFxorder - Get a specific foreign exchange order (FX order) with details
+func GetFxorder(c *gin.Context) {
 	c.String(http.StatusOK, "Get specific FX Order status. You are best offer: 100MM EUR/SEK @ 10.53 . \n")
 }
 

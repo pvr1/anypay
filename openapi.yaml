@@ -247,7 +247,7 @@ paths:
           description: "Transaction not found"
 
 
-  /fxorder:
+  /fxorders:
     post:
       tags:
         - fxorders
@@ -258,10 +258,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fxorder"
+              $ref: "#/components/schemas/Fxorders"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Fxorder"
+              $ref: "#/components/schemas/Fxorders"
         description: Use the fxorder payload to create a FX order
         required: true
       responses:
@@ -277,10 +277,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fxorder"
+              $ref: "#/components/schemas/Fxorders"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Fxorder"
+              $ref: "#/components/schemas/Fxorders"
         description: Use the FX order fragment you want to update from the fxorder payload
         required: true
       responses:
@@ -304,13 +304,13 @@ paths:
         404:
           description: FX order not found
           
-  /fxorder/{fxorderID}:
+  /fxorders/{fxorderID}:
     get:
       tags:   
         - fxorders
       summary: Get a specific foreign exchange order (FX order) with details
       description: GET to retrieve a specific FX-order
-      operationId: getFxorder2
+      operationId: getFxorder
       parameters:
         - name: fxorderID
           in: path
@@ -460,7 +460,7 @@ servers:
   - url: https://api.swedbank.net/anypay/v1
 components:
   schemas:
-    Fxorder:
+    Fxorders:
       type: object
       properties:
         ID:

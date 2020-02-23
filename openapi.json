@@ -359,7 +359,7 @@
         }
       }
     },
-    "/fxorder": {
+    "/fxorders": {
       "post": {
         "tags": [
           "fxorders"
@@ -371,12 +371,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Fxorder"
+                "$ref": "#/components/schemas/Fxorders"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/Fxorder"
+                "$ref": "#/components/schemas/Fxorders"
               }
             }
           },
@@ -400,12 +400,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Fxorder"
+                "$ref": "#/components/schemas/Fxorders"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/Fxorder"
+                "$ref": "#/components/schemas/Fxorders"
               }
             }
           },
@@ -430,7 +430,7 @@
         ],
         "summary": "Get all non-matched FX orders that the login has privileges to get",
         "description": "GET to get list of possible FX orders",
-        "operationId": "getFxorder",
+        "operationId": "getFxorders",
         "responses": {
           "200": {
             "description": "successful operation"
@@ -444,14 +444,14 @@
         }
       }
     },
-    "/fxorder/{fxorderID}": {
+    "/fxorders/{fxorderID}": {
       "get": {
         "tags": [
           "fxorders"
         ],
         "summary": "Get a specific foreign exchange order (FX order) with details",
         "description": "GET to retrieve a specific FX-order",
-        "operationId": "getFxorder2",
+        "operationId": "getFxorder",
         "parameters": [
           {
             "name": "fxorderID",
@@ -671,7 +671,7 @@
   ],
   "components": {
     "schemas": {
-      "Fxorder": {
+      "Fxorders": {
         "type": "object",
         "properties": {
           "ID": {
