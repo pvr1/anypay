@@ -11,6 +11,8 @@
 package main
 
 import (
+	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -33,6 +35,33 @@ func TestAddAccount(t *testing.T) {
 		})
 	}
 }
+
+func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
+	req := httptest.NewRequest(method, path, nil)
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	return w
+}
+
+/*
+func TestEngineHandleContext(t *testing.T) {
+	r := gin.New()
+	r.GET("/", func(c *gin.Context) {
+		c.Request.URL.Path = "/anypay/v1/accounts"
+		r.HandleContext(c)
+	})
+	v2 := r.Group("/v2")
+	{
+		v2.GET("/", func(c *gin.Context) {})
+	}
+
+	assert.NotPanics(t, func() {
+		w := performRequest(r, "GET", "/anypay/v1/transactions")
+		t.Log(w.Result().Body())
+		assert.Equal(t, 301, w.Code)
+	})
+}
+*/
 
 func TestGetAccount(t *testing.T) {
 	type args struct {
