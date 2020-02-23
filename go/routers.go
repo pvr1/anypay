@@ -123,7 +123,7 @@ var routes = Routes{
 		"GetFxorders",
 		http.MethodGet,
 		"/anypay/v1/fxorders",
-		GetFxorder,
+		GetFxorders,
 	},
 
 	{
