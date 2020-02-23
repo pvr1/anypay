@@ -18,20 +18,20 @@ import (
 
 // AddAccount - Add a new account
 func AddAccount(c *gin.Context) {
-	c.JSON(http.StatusOK, "Account added\n")
+	c.String(http.StatusOK, "Account added\n")
 }
 
 // GetAccount - Get a specific account with details
 func GetAccount(c *gin.Context) {
-	c.JSON(http.StatusOK, "There you got your specific Account\n")
+	c.String(http.StatusOK, "There you got your specific Account\n")
 }
 
 // GetAccounts - Get all accounts IDs that the login has privileges to get
 func GetAccounts(c *gin.Context) {
-	c.JSON(http.StatusOK, "Yep. A list of accounts was delivered. Can you see it?? :-)\n")
+	c.String(http.StatusOK, "Yep. A list of accounts was delivered. Can you see it?? :-)\n")
 }
 
 // UpdateAccount - Update an existing account
 func UpdateAccount(c *gin.Context) {
-	c.JSON(http.StatusOK, "Account updated. Now it belongs to me.\n")
+	c.String(http.StatusOK, "Account updated. Now it belongs to me.\n")
 }

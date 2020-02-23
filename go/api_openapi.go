@@ -23,13 +23,13 @@ func OpenAPIjson(c *gin.Context) {
 	file, err := os.Open("/openapi.json")
 	defer file.Close()
 	if err != nil {
-		c.JSON(http.StatusOK, "Could not find openapi file")
+		c.String(http.StatusOK, "Could not find openapi file")
 		return
 	}
 
 	filecontent, err := ioutil.ReadAll(file)
 	if err != nil {
-		c.JSON(http.StatusOK, "Could not read openapi file after loading it")
+		c.String(http.StatusOK, "Could not read openapi file after loading it")
 		return
 	}
 
@@ -41,13 +41,13 @@ func OpenAPIyaml(c *gin.Context) {
 	file, err := os.Open("/openapi.yaml")
 	defer file.Close()
 	if err != nil {
-		c.JSON(http.StatusOK, "Could not find openapi file")
+		c.String(http.StatusOK, "Could not find openapi file")
 		return
 	}
 
 	filecontent, err := ioutil.ReadAll(file)
 	if err != nil {
-		c.JSON(http.StatusOK, "Could not read openapi file after loading it")
+		c.String(http.StatusOK, "Could not read openapi file after loading it")
 		return
 	}
 	c.String(http.StatusOK, string(filecontent))

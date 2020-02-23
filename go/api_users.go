@@ -18,20 +18,20 @@ import (
 
 // AddUser - Add a new user
 func AddUser(c *gin.Context) {
-	c.JSON(http.StatusOK, "User added\n")
+	c.String(http.StatusOK, "User added\n")
 }
 
 // GetUser - Get a specific user with details
 func GetUser(c *gin.Context) {
-	c.JSON(http.StatusOK, "Get specific User\n")
+	c.String(http.StatusOK, "Get specific User\n")
 }
 
 // GetUses - Get all user IDs that the login has privileges to get
 func GetUses(c *gin.Context) {
-	c.JSON(http.StatusOK, "Get list of Users\n")
+	c.String(http.StatusOK, "Get list of Users\n")
 }
 
 // UpdateUser - Update an existing user
 func UpdateUser(c *gin.Context) {
-	c.JSON(http.StatusOK, "User updated\n")
+	c.String(http.StatusOK, "User updated\n")
 }

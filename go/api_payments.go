@@ -18,25 +18,25 @@ import (
 
 // AddPayment - Add a new payment
 func AddPayment(c *gin.Context) {
-	c.JSON(http.StatusOK, "Payment order added\n")
+	c.String(http.StatusOK, "Payment order added\n")
 }
 
 // DeletePayment - Deletes a payment-instruction not settled yet
 func DeletePayment(c *gin.Context) {
-	c.JSON(http.StatusOK, "Payment order deleted\n")
+	c.String(http.StatusOK, "Payment order deleted\n")
 }
 
 // GetPayment - Get a specific payment-instruction with details
 func GetPayment(c *gin.Context) {
-	c.JSON(http.StatusOK, "Get specific Payment order\n")
+	c.String(http.StatusOK, "Get specific Payment order\n")
 }
 
 // GetPayments - Get all non-settled payment-instructions IDs that the login has privileges to get
 func GetPayments(c *gin.Context) {
-	c.JSON(http.StatusOK, "Get list of Payment orders\n")
+	c.String(http.StatusOK, "Get list of Payment orders\n")
 }
 
 // UpdatePayment - Update an existing payment-instruction not settled yet
 func UpdatePayment(c *gin.Context) {
-	c.JSON(http.StatusOK, "Payment order updated\n")
+	c.String(http.StatusOK, "Payment order updated\n")
 }

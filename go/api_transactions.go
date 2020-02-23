@@ -18,10 +18,10 @@ import (
 
 // GetTransaction - Get a details of a specific transaction
 func GetTransaction(c *gin.Context) {
-	c.JSON(http.StatusOK, "Get list of Transactions originating from FX Orders and Payments\n")
+	c.String(http.StatusOK, "Get list of Transactions originating from FX Orders and Payments\n")
 }
 
 // GetTransactions - Get a collection of transactions
 func GetTransactions(c *gin.Context) {
-	c.JSON(http.StatusOK, "There you got your specific transaction\n")
+	c.String(http.StatusOK, "There you got your specific transaction\n")
 }
