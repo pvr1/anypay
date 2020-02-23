@@ -1,0 +1,637 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: per.von.rosen@swedbank.com
+  description: This the AnyPay service targeted towards, parents with children doing
+    payments and russian oligarks
+  title: AnyPay
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swedbank an th AnyPay service from a local office
+    or call +46 8 5859000
+  url: http://swebank.com
+servers:
+- url: https://api.swedbank.net/anypay/v1
+tags:
+- description: Everything about your AnyPay payments
+  externalDocs:
+    description: Find out more here!! And change to proper URL
+    url: http://api.swedbank.net/docs/anypay
+  name: accounts
+paths:
+  /accounts:
+    get:
+      description: GET to get list of possible accounts
+      operationId: getAccounts
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Account not found
+      summary: Get all accounts IDs that the login has privileges to get
+      tags:
+      - accounts
+    post:
+      description: POST to create a new account
+      operationId: addAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Account'
+        description: Use the account payload to create an account
+        required: true
+      responses:
+        "405":
+          description: Invalid input
+      summary: Add a new account
+      tags:
+      - accounts
+    put:
+      description: PUT to update an existing account
+      operationId: updateAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Account'
+        description: Use the account fragment you want to update from the account
+          payload
+        required: true
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Account not found
+        "405":
+          description: ValIDation exception
+      summary: Update an existing account
+      tags:
+      - accounts
+  /accounts/{accountID}:
+    get:
+      description: GET to retrieve a specific account
+      operationId: getAccount
+      parameters:
+      - description: ID of account to return
+        explode: false
+        in: path
+        name: accountID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Account not found
+      summary: Get a specific account with details
+      tags:
+      - accounts
+  /payments:
+    get:
+      description: GET to get list of possible PAYMENTS
+      operationId: getPayments
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Payment not found
+      summary: Get all non-settled payment-instructions IDs that the login has privileges
+        to get
+      tags:
+      - payments
+    post:
+      description: POST to create a new payment-instruction
+      operationId: addPayment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Payment'
+        description: Use the payment payload to create a payment-instruction
+        required: true
+      responses:
+        "405":
+          description: Invalid input
+      summary: Add a new payment
+      tags:
+      - payments
+    put:
+      description: PUT to update an existing payment-instruction
+      operationId: updatePayment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Payment'
+        description: Use the PAYMENT fragment you want to update from the payment
+          payload
+        required: true
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Payment not found
+        "405":
+          description: ValIDation exception
+      summary: Update an existing payment-instruction not settled yet
+      tags:
+      - payments
+  /payments/{paymentID}:
+    delete:
+      operationId: deletePayment
+      parameters:
+      - description: Payment ID to delete
+        explode: false
+        in: path
+        name: paymentID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Payment not found
+      summary: Deletes a payment-instruction not settled yet
+      tags:
+      - payments
+    get:
+      description: GET to retrieve a specific PAYMENT
+      operationId: getPayment
+      parameters:
+      - description: ID of payment to return
+        explode: false
+        in: path
+        name: paymentID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Account not found
+      summary: Get a specific payment-instruction with details
+      tags:
+      - payments
+  /transactions:
+    get:
+      description: GET to collection of transactions
+      operationId: getTransactions
+      parameters:
+      - description: ID of transaction to return
+        explode: true
+        in: query
+        name: transactionID
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: ID of account to filter on
+        explode: true
+        in: query
+        name: accountID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Transactions not found
+      summary: Get a collection of transactions
+      tags:
+      - transactions
+  /transactions/{transactionID}:
+    get:
+      description: GET a details of a specific transaction
+      operationId: getTransaction
+      parameters:
+      - description: ID of transaction to return
+        explode: false
+        in: path
+        name: transactionID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Transaction not found
+      summary: Get a details of a specific transaction
+      tags:
+      - transactions
+  /fxorder:
+    get:
+      description: GET to get list of possible FX orders
+      operationId: getFxorder
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: FX order not found
+      summary: Get all non-matched FX orders that the login has privileges to get
+      tags:
+      - fxorders
+    post:
+      description: POST to create a new FX order
+      operationId: addFxorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fxorder'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Fxorder'
+        description: Use the fxorder payload to create a FX order
+        required: true
+      responses:
+        "405":
+          description: Invalid input
+      summary: Add a new Foreig Exchange order
+      tags:
+      - fxorders
+    put:
+      description: PUT to update an existing FX order
+      operationId: updateFxorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fxorder'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Fxorder'
+        description: Use the FX order fragment you want to update from the fxorder
+          payload
+        required: true
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: FX order not found
+        "405":
+          description: ValIDation exception
+      summary: Update a existing  FX order not matched yet, on the market place
+      tags:
+      - fxorders
+  /fxorder/{fxorderID}:
+    delete:
+      operationId: deleteFxorder
+      parameters:
+      - description: FX-order to delete
+        explode: false
+        in: path
+        name: fxorderID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: FX-order not found
+      summary: Deletes a payment-instruction not settled yet
+      tags:
+      - fxorders
+    get:
+      description: GET to retrieve a specific FX-order
+      operationId: getFxorder2
+      parameters:
+      - description: ID of FX-order to return
+        explode: false
+        in: path
+        name: fxorderID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: FX-order not found
+      summary: Get a specific foreign exchange order (FX order) with details
+      tags:
+      - fxorders
+  /users:
+    get:
+      description: GET to get list of possible users
+      operationId: getUses
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: User not found
+      summary: Get all user IDs that the login has privileges to get
+      tags:
+      - users
+    post:
+      description: POST to create a new user
+      operationId: addUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Use the account payload to create an user
+        required: true
+      responses:
+        "405":
+          description: Invalid input
+      summary: Add a new user
+      tags:
+      - users
+    put:
+      description: PUT to update an existing user
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Use the user fragment you want to update from the user payload
+        required: true
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: User not found
+        "405":
+          description: ValIDation exception
+      summary: Update an existing user
+      tags:
+      - users
+  /users/{userID}:
+    get:
+      description: GET to retrieve a specific use
+      operationId: getUser
+      parameters:
+      - description: ID of user to return
+        explode: false
+        in: path
+        name: userID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: User not found
+      summary: Get a specific user with details
+      tags:
+      - users
+  /openapi/json:
+    get:
+      description: Get OpenAPI 3.0 JSON-file
+      operationId: OpenAPIjson
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: File not found
+      summary: Get OpenAPI 3.0 JSON
+      tags:
+      - openapi
+  /openapi/yaml:
+    get:
+      description: Get OpenAPI 3.0 YAML-file
+      operationId: OpenAPIyaml
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: File not found
+      summary: Get OpenAPI 3.0 YAML
+      tags:
+      - openapi
+components:
+  schemas:
+    Fxorder:
+      example:
+        FX: 6
+        quantity: 1
+        ID: 0
+        settlementDate: 2000-01-23T04:56:07.000+00:00
+        complete: false
+        orderDate: 2000-01-23T04:56:07.000+00:00
+        account:
+          accountID: accountID
+          purpose: purpose
+          accountType: accountType
+          name: name
+          user:
+            firstName: firstName
+            lastName: lastName
+            userStatus: 6
+            phone: phone
+            socialSecuityNumber: socialSecuityNumber
+            ID: 0
+            email: email
+            username: username
+        status: onMarket
+      properties:
+        ID:
+          format: int64
+          type: integer
+        FX:
+          format: int64
+          type: integer
+        account:
+          $ref: '#/components/schemas/Account'
+        quantity:
+          format: int32
+          type: integer
+        orderDate:
+          format: date-time
+          type: string
+        settlementDate:
+          format: date-time
+          type: string
+        status:
+          description: Order Status
+          enum:
+          - onMarket
+          - notApproved
+          - matched
+          type: string
+        complete:
+          default: false
+          type: boolean
+      type: object
+      xml:
+        name: Fxorder
+    User:
+      example:
+        firstName: firstName
+        lastName: lastName
+        userStatus: 6
+        phone: phone
+        socialSecuityNumber: socialSecuityNumber
+        ID: 0
+        email: email
+        username: username
+      properties:
+        ID:
+          format: int64
+          type: integer
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        socialSecuityNumber:
+          type: string
+        phone:
+          type: string
+        userStatus:
+          description: User Status
+          format: int32
+          type: integer
+      type: object
+      xml:
+        name: User
+    Account:
+      example:
+        accountID: accountID
+        purpose: purpose
+        accountType: accountType
+        name: name
+        user:
+          firstName: firstName
+          lastName: lastName
+          userStatus: 6
+          phone: phone
+          socialSecuityNumber: socialSecuityNumber
+          ID: 0
+          email: email
+          username: username
+      properties:
+        accountID:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        name:
+          type: string
+        purpose:
+          type: string
+        accountType:
+          type: string
+      required:
+      - accountType
+      - name
+      type: object
+      xml:
+        name: Account
+    Payment:
+      example:
+        fromAccountID: 0
+        purpose: purpose
+        paymentID: paymentID
+        name: name
+        toAccountID: 6
+        currency: currency
+        value: 1.4658129805029452
+      properties:
+        paymentID:
+          type: string
+        name:
+          type: string
+        purpose:
+          type: string
+        fromAccountID:
+          type: integer
+        toAccountID:
+          type: integer
+        value:
+          type: number
+        currency:
+          type: string
+      required:
+      - currency
+      - fromAccountID
+      - name
+      - toAccountID
+      - value
+      type: object
+      xml:
+        name: Payment
+    Transaction:
+      properties:
+        transactionID:
+          type: string
+        name:
+          type: string
+        purpose:
+          type: string
+        account:
+          $ref: '#/components/schemas/Account'
+        value:
+          type: number
+        currency:
+          type: string
+      type: object
+      xml:
+        name: Transaction
