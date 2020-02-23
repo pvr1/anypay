@@ -14,6 +14,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	openapi "github.com/pvr1/anypay/go"
 )
 
 func TestAddFxorder(t *testing.T) {
@@ -28,7 +29,7 @@ func TestAddFxorder(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.AddFxorder(tt.args.c)
+			openapi.AddFxorder(tt.args.c)
 		})
 	}
 }
@@ -45,7 +46,7 @@ func TestDeleteFxorder(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.DeleteFxorder(tt.args.c)
+			openapi.DeleteFxorder(tt.args.c)
 		})
 	}
 }
@@ -62,7 +63,7 @@ func TestGetFxorders(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.GetFxorders(tt.args.c)
+			openapi.GetFxorders(tt.args.c)
 		})
 	}
 }
@@ -79,7 +80,7 @@ func TestGetFxorder(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.GetFxorder(tt.args.c)
+			openapi.GetFxorder(tt.args.c)
 		})
 	}
 }
@@ -96,7 +97,7 @@ func TestUpdateFxorder(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.UpdateFxorder(tt.args.c)
+			openapi.UpdateFxorder(tt.args.c)
 		})
 	}
 }

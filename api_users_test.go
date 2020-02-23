@@ -14,6 +14,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	openapi "github.com/pvr1/anypay/go"
 )
 
 func TestAddUser(t *testing.T) {
@@ -28,7 +29,7 @@ func TestAddUser(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.AddUser(tt.args.c)
+			openapi.AddUser(tt.args.c)
 		})
 	}
 }
@@ -45,7 +46,7 @@ func TestGetUser(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.GetUser(tt.args.c)
+			openapi.GetUser(tt.args.c)
 		})
 	}
 }
@@ -62,7 +63,7 @@ func TestGetUses(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.GetUses(tt.args.c)
+			openapi.GetUses(tt.args.c)
 		})
 	}
 }
@@ -79,7 +80,7 @@ func TestUpdateUser(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.UpdateUser(tt.args.c)
+			openapi.UpdateUser(tt.args.c)
 		})
 	}
 }

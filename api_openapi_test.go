@@ -14,6 +14,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	openapi "github.com/pvr1/anypay/go"
 )
 
 func TestOpenAPIjson(t *testing.T) {
@@ -28,7 +29,7 @@ func TestOpenAPIjson(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.OpenAPIjson(tt.args.c)
+			openapi.OpenAPIjson(tt.args.c)
 		})
 	}
 }
@@ -45,7 +46,7 @@ func TestOpenAPIyaml(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.OpenAPIyaml(tt.args.c)
+			openapi.OpenAPIyaml(tt.args.c)
 		})
 	}
 }

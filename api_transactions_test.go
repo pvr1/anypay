@@ -14,6 +14,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	openapi "github.com/pvr1/anypay/go"
 )
 
 func TestGetTransaction(t *testing.T) {
@@ -28,7 +29,7 @@ func TestGetTransaction(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.GetTransaction(tt.args.c)
+			openapi.GetTransaction(tt.args.c)
 		})
 	}
 }
@@ -45,7 +46,7 @@ func TestGetTransactions(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.GetTransactions(tt.args.c)
+			openapi.GetTransactions(tt.args.c)
 		})
 	}
 }

@@ -15,6 +15,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	openapi "github.com/pvr1/anypay/go"
 )
 
 func TestNewRouter(t *testing.T) {
@@ -26,7 +27,7 @@ func TestNewRouter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewRouter(); !reflect.DeepEqual(got, tt.want) {
+			if got := openapi.NewRouter(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewRouter() = %v, want %v", got, tt.want)
 			}
 		})
@@ -45,7 +46,7 @@ func TestIndex(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Index(tt.args.c)
+			openapi.Index(tt.args.c)
 		})
 	}
 }

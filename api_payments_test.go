@@ -14,6 +14,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	openapi "github.com/pvr1/anypay/go"
 )
 
 func TestAddPayment(t *testing.T) {
@@ -28,7 +29,7 @@ func TestAddPayment(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.AddPayment(tt.args.c)
+			openapi.AddPayment(tt.args.c)
 		})
 	}
 }
@@ -45,7 +46,7 @@ func TestDeletePayment(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.DeletePayment(tt.args.c)
+			openapi.DeletePayment(tt.args.c)
 		})
 	}
 }
@@ -62,7 +63,7 @@ func TestGetPayment(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.GetPayment(tt.args.c)
+			openapi.GetPayment(tt.args.c)
 		})
 	}
 }
@@ -79,7 +80,7 @@ func TestGetPayments(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.GetPayments(tt.args.c)
+			openapi.GetPayments(tt.args.c)
 		})
 	}
 }
@@ -96,7 +97,7 @@ func TestUpdatePayment(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			go.UpdatePayment(tt.args.c)
+			openapi.UpdatePayment(tt.args.c)
 		})
 	}
 }
