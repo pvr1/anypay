@@ -44,7 +44,8 @@ var (
 func AddFxorder(c *gin.Context) {
 	c.String(http.StatusOK, "FX Order place on market place\n")
 
-	var byteMsg []byte	
+	//var byteMsg []byte	
+	byteMsg := make([]byte, 1024)
 	// Read the Body content
 	if c.Request.Body != nil {
 		byteMsg, _ := ioutil.ReadAll(c.Request.Body)
