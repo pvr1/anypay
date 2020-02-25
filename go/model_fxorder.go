@@ -18,7 +18,7 @@ import (
 type Fxorder struct {
 	ID int64 `json:"ID,omitempty"`
 
-	FX int64 `json:"FX,omitempty"`
+	FX String `json:"FX,omitempty"`
 
 	Account Account `json:"account,omitempty"`
 
