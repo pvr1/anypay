@@ -18,7 +18,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/pervrosen/kafkaAPI"
+	"kafkaUtils"
 	"os"
 	"os/signal"
 	"strings"
