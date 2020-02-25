@@ -52,7 +52,7 @@ var (
 // AddFxorder - Add a new Foreig Exchange order
 func AddFxorder(c *gin.Context) {
 	//c.String(http.StatusOK, "FX Order place on market place\n")
-
+	c.String(http.StatusOK, "Tjoohoo\n")
 	var byteMsg []byte
 	byteMsg = make([]byte, 1024)
 	// Read the Body content
