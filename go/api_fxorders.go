@@ -24,6 +24,7 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	"bytes"
 
 	"github.com/rs/zerolog/log"
 	"github.com/segmentio/kafka-go"
@@ -116,7 +117,6 @@ func AddFxorder(c *gin.Context) {
 	log.Debug().Msg("Read request message body")
 	if err != nil {
 		log.Error().Msgf("error while receiving message: %s", err.Error())
-		continue
 	}
 
 	log.Debug().Msg("Inside for loop...")
@@ -129,7 +129,7 @@ func AddFxorder(c *gin.Context) {
 
 
 	var ctx = context.Background()
-	err = kafkaUtils.Push(ctx, fxorder.FX, fxorder)
+	err = kafkaUtils.Push(ctx, fxorder.FX, string(fxorder))
 	if err != nil {
 		log.Error().Msg("Kafka write to topic Out failed")
 	}
