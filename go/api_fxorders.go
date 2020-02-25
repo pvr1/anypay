@@ -44,6 +44,7 @@ var (
 func AddFxorder(c *gin.Context) {
 	c.String(http.StatusOK, "FX Order place on market place\n")
 
+	/*
 	var byteMsg []byte	
 	byteMsg = []byte("Hej")
 	// Read the Body content
@@ -62,6 +63,8 @@ func AddFxorder(c *gin.Context) {
 	//order := new(models.GeaOrder)
 	//error := c.Bind(order)
 
+	*/
+
 	/*
 	Other example
 	if c.Request.Method == "POST" {
@@ -74,6 +77,8 @@ func AddFxorder(c *gin.Context) {
 	}
 	*/
 
+
+	/*
 	flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:19092,localhost:29092,localhost:39092", "Kafka brokers in comma separated value")
 	flag.BoolVar(&kafkaVerbose, "kafka-verbose", true, "Kafka verbose logging")
 	flag.StringVar(&kafkaTopicIn, "kafka-topicIn", "foo", "Kafka topic. Only one topic per worker.")
@@ -143,6 +148,7 @@ func AddFxorder(c *gin.Context) {
 	fmt.Printf("message at topic/partition/offset %v/%v/%v: %s\n", m.Topic, m.Partition, m.Offset, string(value))
 	
 	log.Debug().Msgf("Closing Down")
+	*/
 }
 
 // DeleteFxorder - Deletes a payment-instruction not settled yet
