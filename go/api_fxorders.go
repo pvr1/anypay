@@ -109,6 +109,7 @@ func AddFxorder(c *gin.Context) {
 	defer reader.Close()
 	
 	log.Debug().Msg("Conected to kafka")
+	/*
 	m, err := reader.ReadMessage(context.Background())
 
 	log.Debug().Msg("Read request message body")
@@ -119,13 +120,16 @@ func AddFxorder(c *gin.Context) {
 
 	log.Debug().Msg("Inside for loop...")
 	value := m.Value
+	*/
+
 	log.Debug().Msg("Got a Message")
 	//		if m.CompressionCodec == snappy.NewCompressionCodec() {
 	//			_, err = snappy.NewCompressionCodec().Decode(value, m.Value)
 	//		}
 
+
 	var ctx = context.Background()
-	err = kafkaUtils.Push(ctx, nil, m.Value)
+	err = kafkaUtils.Push(ctx, fxorder.FX, fxorder)
 	if err != nil {
 		log.Error().Msg("Kafka write to topic Out failed")
 	}
