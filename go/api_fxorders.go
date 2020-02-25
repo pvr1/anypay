@@ -116,21 +116,6 @@ func AddFxorder(c *gin.Context) {
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
 
-	//brokers := strings.Split(kafkaBrokerURL, ",")
-
-	// make a new reader that consumes from topic-A
-	// config := kafka.ReaderConfig{
-	// Brokers:         brokers,
-	// GroupID:         kafkaClientID,
-	// Topic:           kafkaTopicIn,
-	// MinBytes:        10e3,            // 10KB
-	// MaxBytes:        10e6,            // 10MB
-	// MaxWait:         1 * time.Second, // Maximum amount of time to wait for new data to come when fetching batches of messages from kafka.
-	// ReadLagInterval: -1,
-	// }
-
-	//reader := kafka.NewReader(config)
-
 	// connect to kafka
 	kafkaProducer, err := kafkaUtils.Configure(strings.Split(kafkaBrokerURL, ","), kafkaClientID, kafkaTopicOut)
 	if err != nil {
@@ -139,24 +124,6 @@ func AddFxorder(c *gin.Context) {
 	}
 
 	defer kafkaProducer.Close()
-	//defer reader.Close()
-
-	//log.Debug().Msg("Conected to kafka")
-
-	// m, err := reader.ReadMessage(context.Background())
-	//
-	// log.Debug().Msg("Read request message body")
-	// if err != nil {
-	// log.Error().Msgf("error while receiving message: %s", err.Error())
-	// }
-	//
-	// log.Debug().Msg("Inside for loop...")
-	// value := m.Value
-	//
-	// log.Debug().Msg("Got a Message")
-	// if m.CompressionCodec == snappy.NewCompressionCodec() {
-	//			_, err = snappy.NewCompressionCodec().Decode(value, m.Value)
-	//		}
 
 	var ctx = context.Background()
 	// log.Debug().Msg("************")
@@ -174,16 +141,11 @@ func AddFxorder(c *gin.Context) {
 		c.String(http.StatusOK, "Kafka write to topic Out worked\n")
 	}
 
-	log.Debug().Msg("Have pushed to kafka")
 	if err != nil {
 		log.Error().Msgf("error while receiving message: %s", err.Error())
 	}
-	log.Debug().Msg("Printing response from kafka")
-	//fmt.Printf("message at topic/partition/offset %v/%v/%v: %s\n", m.Topic, m.Partition, m.Offset, string(value))
 
-	log.Debug().Msgf("Closing Down")
-
-	//c.String(http.StatusOK, "FX Order place on market place\n")
+	c.String(http.StatusOK, "FX Order place on market place\n")
 }
 
 // DeleteFxorder - Deletes a payment-instruction not settled yet
