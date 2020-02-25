@@ -10,6 +10,14 @@
 
 package openapi
 
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+/*
 import (
 	"net/http"
 	"io/ioutil"
@@ -39,6 +47,7 @@ var (
 	kafkaConsumerGroup string
 	kafkaClientID      string
 )
+*/
 
 // AddFxorder - Add a new Foreig Exchange order
 func AddFxorder(c *gin.Context) {
