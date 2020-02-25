@@ -43,13 +43,16 @@ var (
 func AddFxorder(c *gin.Context) {
 	c.String(http.StatusOK, "FX Order place on market place\n")
 
+	var byteMsg []byte	
 	// Read the Body content
 	if c.Request.Body != nil {
 		byteMsg, _ := ioutil.ReadAll(c.Request.Body)
 	}
 	
 	// Restore the io.ReadCloser to its original state
-	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
+	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(byteMsg))
+
+	log.Debug().Msg(string(byteMsg))
 
 	// Continue to use the Body, like Binding it to a struct:
 	var fxorder Fxorder
@@ -127,7 +130,7 @@ func AddFxorder(c *gin.Context) {
 
 
 	var ctx = context.Background()
-	err = kafkaAPI.kafkaUtils.Push(ctx, fxorder.FX, fxorder)
+	err = kafkaUtils.Push(ctx, fxorder.FX, fxorder)
 	if err != nil {
 		log.Error().Msg("Kafka write to topic Out failed")
 	}
