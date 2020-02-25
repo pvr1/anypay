@@ -2,7 +2,7 @@ FROM golang:1.13.0 AS builder
  
 # Add all the source code (except what's ignored
 # under `.dockerignore`) to the build context.
-ADD ./ /go/src/github.com/pvr1/anypay
+# ADD ./ /go/src/github.com/pvr1/anypay
  
 #RUN  apt-get install bash
 RUN go get -u github.com/pvr1/anypay
