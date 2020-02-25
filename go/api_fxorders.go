@@ -51,7 +51,7 @@ var (
 
 // AddFxorder - Add a new Foreig Exchange order
 func AddFxorder(c *gin.Context) {
-	c.String(http.StatusOK, "FX Order place on market place\n")
+	//c.String(http.StatusOK, "FX Order place on market place\n")
 
 	var byteMsg []byte
 	byteMsg = make([]byte, 1024)
@@ -83,7 +83,8 @@ func AddFxorder(c *gin.Context) {
 		}
 	*/
 
-	flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:19092,localhost:29092,localhost:39092", "Kafka brokers in comma separated value")
+	//flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:19092,localhost:29092,localhost:39092", "Kafka brokers in comma separated value")
+	flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:9092", "Kafka brokers in comma separated value")
 	flag.BoolVar(&kafkaVerbose, "kafka-verbose", true, "Kafka verbose logging")
 	flag.StringVar(&kafkaTopicIn, "kafka-topicIn", "foo", "Kafka topic. Only one topic per worker.")
 	flag.StringVar(&kafkaTopicOut, "kafka-topicOut", "foo2", "Kafka topic. Only one topic per worker.")
@@ -141,6 +142,9 @@ func AddFxorder(c *gin.Context) {
 	err = kafkaUtils.Push(ctx, []byte(fxorder.FX), []byte("B 100MM EURSEK@10.53 account1")) //fxorder skall parse:as
 	if err != nil {
 		log.Error().Msg("Kafka write to topic Out failed")
+		c.String(http.StatusOK, "Kafka write to topic Out failed\n")
+	} else {
+		c.String(http.StatusOK, "Kafka write to topic Out worked\n")
 	}
 
 	log.Debug().Msg("Have pushed to kafka")
@@ -151,7 +155,7 @@ func AddFxorder(c *gin.Context) {
 	fmt.Printf("message at topic/partition/offset %v/%v/%v: %s\n", m.Topic, m.Partition, m.Offset, string(value))
 
 	log.Debug().Msgf("Closing Down")
-
+	//c.String(http.StatusOK, "FX Order place on market place\n")
 }
 
 // DeleteFxorder - Deletes a payment-instruction not settled yet
