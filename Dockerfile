@@ -18,7 +18,7 @@ RUN set -ex && \
         -ldflags '-extldflags "-static"' && \
   mv ./anypay /usr/bin/anypay
  
-FROM alpine:3.10.2
+FROM alpine:3.11.3
  
 # Retrieve the binary from the previous stage
 COPY --from=builder /usr/bin/anypay /usr/local/bin/anypay
