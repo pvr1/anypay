@@ -19,14 +19,14 @@ import (
 */
 
 import (
+	"bytes"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
 
-	"bytes"
 	"context"
 	"flag"
-	"fmt"
 	"os"
 	"os/signal"
 	"strings"
@@ -52,25 +52,25 @@ var (
 // AddFxorder - Add a new Foreig Exchange order
 func AddFxorder(c *gin.Context) {
 	//c.String(http.StatusOK, "FX Order place on market place\n")
-	c.String(http.StatusOK, "Tjoohoo\n")
-	var byteMsg []byte
-	byteMsg = make([]byte, 1024)
-	// Read the Body content
-	if c.Request.Body != nil {
-		byteMsg, _ = ioutil.ReadAll(c.Request.Body)
-	}
+	/*
+		var byteMsg []byte
+		byteMsg = make([]byte, 1024)
+		// Read the Body content
+		if c.Request.Body != nil {
+			byteMsg, _ = ioutil.ReadAll(c.Request.Body)
+		}
 
-	// Restore the io.ReadCloser to its original state
-	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(byteMsg))
+		// Restore the io.ReadCloser to its original state
+		c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(byteMsg))
 
-	log.Debug().Msg(string(byteMsg))
+		log.Debug().Msg(string(byteMsg))
 
-	// Continue to use the Body, like Binding it to a struct:
-	var fxorder Fxorder
-	c.BindJSON(&fxorder)
-	//order := new(models.GeaOrder)
-	//error := c.Bind(order)
-
+		// Continue to use the Body, like Binding it to a struct:
+		var fxorder Fxorder
+		c.Bind(&fxorder)
+		//order := new(models.GeaOrder)
+		//error := c.Bind(order)
+	*/
 	/*
 		Other example
 		if c.Request.Method == "POST" {
@@ -83,13 +83,33 @@ func AddFxorder(c *gin.Context) {
 		}
 	*/
 
-	//flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:19092,localhost:29092,localhost:39092", "Kafka brokers in comma separated value")
-	flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:9092", "Kafka brokers in comma separated value")
-	flag.BoolVar(&kafkaVerbose, "kafka-verbose", true, "Kafka verbose logging")
-	flag.StringVar(&kafkaTopicIn, "kafka-topicIn", "foo", "Kafka topic. Only one topic per worker.")
-	flag.StringVar(&kafkaTopicOut, "kafka-topicOut", "foo2", "Kafka topic. Only one topic per worker.")
-	flag.StringVar(&kafkaConsumerGroup, "kafka-consumer-group", "consumer-group", "Kafka consumer group")
-	flag.StringVar(&kafkaClientID, "kafka-client-id", "my-client-id", "Kafka client id")
+	var byteMsg []byte
+	byteMsg = make([]byte, 1024)
+	// Read the Body content
+	if c.Request.Body != nil {
+		byteMsg, _ = ioutil.ReadAll(c.Request.Body)
+	}
+
+	// Restore the io.ReadCloser to its original state
+	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(byteMsg))
+
+	//log.Debug().Msg(string(byteMsg))
+
+	var fxorder Fxorder
+	if err := c.ShouldBindJSON(&fxorder); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if kafkaBrokerURL == "" {
+		//flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:19092,localhost:29092,localhost:39092", "Kafka brokers in comma separated value")
+		flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:9092", "Kafka brokers in comma separated value")
+		flag.BoolVar(&kafkaVerbose, "kafka-verbose", true, "Kafka verbose logging")
+		flag.StringVar(&kafkaTopicIn, "kafka-topicIn", "foo2", "Kafka topic. Only one topic per worker.")
+		flag.StringVar(&kafkaTopicOut, "kafka-topicOut", "foo2", "Kafka topic. Only one topic per worker.")
+		flag.StringVar(&kafkaConsumerGroup, "kafka-consumer-group", "consumer-group", "Kafka consumer group")
+		flag.StringVar(&kafkaClientID, "kafka-client-id", "my-client-id", "Kafka client id")
+	}
 
 	flag.Parse()
 
@@ -139,7 +159,14 @@ func AddFxorder(c *gin.Context) {
 	//		}
 
 	var ctx = context.Background()
-	err = kafkaUtils.Push(ctx, []byte(fxorder.FX), []byte("B 100MM EURSEK@10.53 account1")) //fxorder skall parse:as
+	// log.Debug().Msg("************")
+	// log.Debug().Msg("ID: " + string(fxorder.ID))
+	// log.Debug().Msg("FX: " + fxorder.FX)
+	// log.Debug().Msg("Amount: " + string(fxorder.Quantity))
+	// log.Debug().Msg("SettlementDate: " + fxorder.SettlementDate.String())
+	// log.Debug().Msg("OrderDate: " + fxorder.OrderDate.String())
+	// log.Debug().Msg("************")
+	err = kafkaUtils.Push(ctx, []byte(fxorder.FX), []byte(string(fxorder.Quantity)+"/"+fxorder.FX)) //fxorder skall parse:as
 	if err != nil {
 		log.Error().Msg("Kafka write to topic Out failed")
 		c.String(http.StatusOK, "Kafka write to topic Out failed\n")
