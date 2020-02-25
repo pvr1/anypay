@@ -44,12 +44,12 @@ func AddFxorder(c *gin.Context) {
 	c.String(http.StatusOK, "FX Order place on market place\n")
 
 	// Read the Body content
-	if c.Request().Body != nil {
-		byteMsg, _ := ioutil.ReadAll(c.Request().Body)
+	if c.Request.Body != nil {
+		byteMsg, _ := ioutil.ReadAll(c.Request.Body)
 	}
 	
 	// Restore the io.ReadCloser to its original state
-	c.Request().Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
+	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 
 	// Continue to use the Body, like Binding it to a struct:
 	var fxorder Fxorder
