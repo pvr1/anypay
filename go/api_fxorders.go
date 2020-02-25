@@ -18,7 +18,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	kafkaUtils "github.com/pvr1/anypay/kafkaUtils"
+	kafkaUtils "github.com/pvr1/anypay/kafka"
 	"os"
 	"os/signal"
 	"strings"
@@ -27,8 +27,6 @@ import (
 
 	"github.com/rs/zerolog/log"
 	"github.com/segmentio/kafka-go"
-
-	"model_fxorder"
 )
 
 var (
