@@ -18,7 +18,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"kafkaUtils"
+	kafkaUtils "github.com/pvr1/anypay/kafkaUtils"
 	"os"
 	"os/signal"
 	"strings"
