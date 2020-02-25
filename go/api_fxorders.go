@@ -129,7 +129,7 @@ func AddFxorder(c *gin.Context) {
 
 
 	var ctx = context.Background()
-	err = kafkaUtils.Push(ctx, []byte(fxorder.FX), []byte(fxorder))
+	err = kafkaUtils.Push(ctx, []byte(fxorder.FX), []byte("B 100MM EURSEK@10.53 account1")) //fxorder skall parse:as
 	if err != nil {
 		log.Error().Msg("Kafka write to topic Out failed")
 	}
