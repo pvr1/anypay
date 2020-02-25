@@ -18,7 +18,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/pvr1/kafkaAPI/kafkaUtils"
+	"github.com/pervrosen/kafkaAPI"
 	"os"
 	"os/signal"
 	"strings"
@@ -129,7 +129,7 @@ func AddFxorder(c *gin.Context) {
 
 
 	var ctx = context.Background()
-	err = kafkaUtils.Push(ctx, fxorder.FX, fxorder)
+	err = kafkaAPI.kafkaUtils.Push(ctx, fxorder.FX, fxorder)
 	if err != nil {
 		log.Error().Msg("Kafka write to topic Out failed")
 	}
