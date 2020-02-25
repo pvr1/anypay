@@ -155,6 +155,7 @@ func AddFxorder(c *gin.Context) {
 	fmt.Printf("message at topic/partition/offset %v/%v/%v: %s\n", m.Topic, m.Partition, m.Offset, string(value))
 
 	log.Debug().Msgf("Closing Down")
+
 	//c.String(http.StatusOK, "FX Order place on market place\n")
 }
 
