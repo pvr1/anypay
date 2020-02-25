@@ -10,29 +10,30 @@
 
 package openapi
 
-
+/*
 import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
+*/
 
-/*
 import (
-	"net/http"
-	"io/ioutil"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"net/http"
 
+	"bytes"
 	"context"
 	"flag"
 	"fmt"
-	kafkaUtils "github.com/pvr1/anypay/kafka"
 	"os"
 	"os/signal"
 	"strings"
 	"syscall"
 	"time"
-	"bytes"
+
+	kafkaUtils "github.com/pvr1/anypay/kafka"
 
 	"github.com/rs/zerolog/log"
 	"github.com/segmentio/kafka-go"
@@ -47,20 +48,18 @@ var (
 	kafkaConsumerGroup string
 	kafkaClientID      string
 )
-*/
 
 // AddFxorder - Add a new Foreig Exchange order
 func AddFxorder(c *gin.Context) {
 	c.String(http.StatusOK, "FX Order place on market place\n")
 
-	/*
-	var byteMsg []byte	
-	byteMsg = []byte("Hej")
+	var byteMsg []byte
+	byteMsg = make([]byte, 1024)
 	// Read the Body content
 	if c.Request.Body != nil {
-		byteMsg, _ := ioutil.ReadAll(c.Request.Body)
+		byteMsg, _ = ioutil.ReadAll(c.Request.Body)
 	}
-	
+
 	// Restore the io.ReadCloser to its original state
 	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(byteMsg))
 
@@ -72,22 +71,18 @@ func AddFxorder(c *gin.Context) {
 	//order := new(models.GeaOrder)
 	//error := c.Bind(order)
 
+	/*
+		Other example
+		if c.Request.Method == "POST" {
+			var u User
+			c.BindJSON(&u)
+			c.JSON(http.StatusOK, gin.H{
+				"user": u.Username,
+				"pass": u.Password,
+			})
+		}
 	*/
 
-	/*
-	Other example
-	if c.Request.Method == "POST" {
-		var u User
-		c.BindJSON(&u)
-		c.JSON(http.StatusOK, gin.H{
-			"user": u.Username,
-			"pass": u.Password,
-		})
-	}
-	*/
-
-
-	/*
 	flag.StringVar(&kafkaBrokerURL, "kafka-brokers", "localhost:19092,localhost:29092,localhost:39092", "Kafka brokers in comma separated value")
 	flag.BoolVar(&kafkaVerbose, "kafka-verbose", true, "Kafka verbose logging")
 	flag.StringVar(&kafkaTopicIn, "kafka-topicIn", "foo", "Kafka topic. Only one topic per worker.")
@@ -124,9 +119,9 @@ func AddFxorder(c *gin.Context) {
 
 	defer kafkaProducer.Close()
 	defer reader.Close()
-	
+
 	log.Debug().Msg("Conected to kafka")
-	
+
 	m, err := reader.ReadMessage(context.Background())
 
 	log.Debug().Msg("Read request message body")
@@ -142,7 +137,6 @@ func AddFxorder(c *gin.Context) {
 	//			_, err = snappy.NewCompressionCodec().Decode(value, m.Value)
 	//		}
 
-
 	var ctx = context.Background()
 	err = kafkaUtils.Push(ctx, []byte(fxorder.FX), []byte("B 100MM EURSEK@10.53 account1")) //fxorder skall parse:as
 	if err != nil {
@@ -155,9 +149,9 @@ func AddFxorder(c *gin.Context) {
 	}
 	log.Debug().Msg("Printing response from kafka")
 	fmt.Printf("message at topic/partition/offset %v/%v/%v: %s\n", m.Topic, m.Partition, m.Offset, string(value))
-	
+
 	log.Debug().Msgf("Closing Down")
-	*/
+
 }
 
 // DeleteFxorder - Deletes a payment-instruction not settled yet
