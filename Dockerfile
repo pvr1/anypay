@@ -1,4 +1,4 @@
-FROM golang:1.13.0 AS builder
+FROM golang:1.14.0 AS builder
  
 # Add all the source code (except what's ignored
 # under `.dockerignore`) to the build context.
@@ -18,7 +18,7 @@ RUN set -ex && \
         -ldflags '-extldflags "-static"' && \
   mv ./anypay /usr/bin/anypay
  
-FROM alpine:3.10.2
+FROM alpine:3.11.3
  
 # Retrieve the binary from the previous stage
 COPY --from=builder /usr/bin/anypay /usr/local/bin/anypay
