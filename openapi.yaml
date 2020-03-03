@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   title: AnyPay
   contact:
-    email: pr.von.rosen@swedbank.com
+    email: per.von.rosen@swedbank.com
 tags:
   - name: accounts
     description: Everything about your AnyPay payments
@@ -55,11 +55,11 @@ paths:
         "404":
           description: Account not found
         "405":
-          description: Validation exception
+          description: ValIDation exception
     get: 
       tags:   
         - accounts
-      summary: Get all accounts ids that the login has privileges to get
+      summary: Get all accounts IDs that the login has privileges to get
       description: GET to get list of possible accounts
       operationId: getAccounts
       responses:
@@ -70,7 +70,7 @@ paths:
         404:
           description: "Account not found"
           
-  /accounts/{accountId}:
+  /accounts/{accountID}:
     get:
       tags:   
         - accounts
@@ -78,9 +78,9 @@ paths:
       description: GET to retrieve a specific account
       operationId: getAccount
       parameters:
-        - name: accountId
+        - name: accountID
           in: path #perhaps shoud be "query"
-          description: Id of account to return
+          description: ID of account to return
           required: true
           schema:
             type: integer
@@ -135,11 +135,11 @@ paths:
         "404":
           description: Payment not found
         "405":
-          description: Validation exception
+          description: ValIDation exception
     get: 
       tags:   
         - payments
-      summary: Get all non-settled payment-instructions ids that the login has privileges to get
+      summary: Get all non-settled payment-instructions IDs that the login has privileges to get
       description: GET to get list of possible PAYMENTS
       operationId: getPayments
       responses:
@@ -150,7 +150,7 @@ paths:
         404:
           description: "Payment not found"
           
-  /payments/{paymentId}:
+  /payments/{paymentID}:
     get:
       tags:   
         - payments
@@ -158,7 +158,7 @@ paths:
       description: GET to retrieve a specific PAYMENT
       operationId: getPayment
       parameters:
-        - name: paymentId
+        - name: paymentID
           in: path
           description: ID of payment to return
           required: true
@@ -180,9 +180,9 @@ paths:
       description: ""
       operationId: deletePayment
       parameters:
-        - name: paymentId
+        - name: paymentID
           in: path
-          description: Payment id to delete
+          description: Payment ID to delete
           required: true
           schema:
             type: integer
@@ -199,16 +199,16 @@ paths:
         - transactions
       summary: Get a collection of transactions
       description: GET to collection of transactions
-      operationId: getTransactins
+      operationId: getTransactions
       parameters:
-        - name: transactionId
+        - name: transactionID
           in: query
           description: ID of transaction to return
           required: false
           schema:
             type: integer
             format: int64
-        - name: accountId
+        - name: accountID
           in: query
           description: ID of account to filter on
           required: true
@@ -223,7 +223,31 @@ paths:
         404:
           description: "Transactions not found"
 
-  /fxorder:
+  /transactions/{transactionID}:
+    get:
+      tags:   
+        - transactions
+      summary: Get a details of a specific transaction
+      description: GET a details of a specific transaction
+      operationId: getTransaction
+      parameters:
+        - name: transactionID
+          in: path
+          description: ID of transaction to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Transaction not found"
+
+
+  /fxorders:
     post:
       tags:
         - fxorders
@@ -234,10 +258,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fxorder"
+              $ref: "#/components/schemas/Fxorders"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Fxorder"
+              $ref: "#/components/schemas/Fxorders"
         description: Use the fxorder payload to create a FX order
         required: true
       responses:
@@ -253,10 +277,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fxorder"
+              $ref: "#/components/schemas/Fxorders"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Fxorder"
+              $ref: "#/components/schemas/Fxorders"
         description: Use the FX order fragment you want to update from the fxorder payload
         required: true
       responses:
@@ -265,13 +289,13 @@ paths:
         "404":
           description: FX order not found
         "405":
-          description: Validation exception
+          description: ValIDation exception
     get: 
       tags:   
         - fxorders
       summary: Get all non-matched FX orders that the login has privileges to get
       description: GET to get list of possible FX orders
-      operationId: getFxorder
+      operationId: getFxorders
       responses:
         200:
           description: successful operation
@@ -280,15 +304,15 @@ paths:
         404:
           description: FX order not found
           
-  /fxorder/{fxorderId}:
+  /fxorders/{fxorderID}:
     get:
       tags:   
         - fxorders
       summary: Get a specific foreign exchange order (FX order) with details
       description: GET to retrieve a specific FX-order
-      operationId: getFxorder2
+      operationId: getFxorder
       parameters:
-        - name: fxorderId
+        - name: fxorderID
           in: path
           description: ID of FX-order to return
           required: true
@@ -310,7 +334,7 @@ paths:
       description: ""
       operationId: deleteFxorder
       parameters:
-        - name: fxorderId
+        - name: fxorderID
           in: path
           description: FX-order to delete
           required: true
@@ -323,7 +347,7 @@ paths:
         "404":
           description: FX-order not found
 
-  /user:
+  /users:
     post:
       tags:
         - users
@@ -365,13 +389,13 @@ paths:
         "404":
           description: User not found
         "405":
-          description: Validation exception
+          description: ValIDation exception
     get: 
       tags:   
         - users
-      summary: Get all user ids that the login has privileges to get
+      summary: Get all user IDs that the login has privileges to get
       description: GET to get list of possible users
-      operationId: getUses
+      operationId: getUsers
       responses:
         200:
           description: "successful operation"
@@ -380,7 +404,7 @@ paths:
         404:
           description: "User not found"
           
-  /users/{userId}:
+  /users/{userID}:
     get:
       tags:   
         - users
@@ -388,9 +412,9 @@ paths:
       description: GET to retrieve a specific use
       operationId: getUser
       parameters:
-        - name: userId
+        - name: userID
           in: path #perhaps shoud be "query"
-          description: Id of user to return
+          description: ID of user to return
           required: true
           schema:
             type: integer
@@ -403,6 +427,32 @@ paths:
         404:
           description: "User not found"
 
+  /openapi/json:
+    get: 
+      tags:   
+        - openapi
+      summary: Get OpenAPI 3.0 JSON 
+      description: Get OpenAPI 3.0 JSON-file
+      operationId: OpenAPIjson
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "File not found"
+
+  /openapi/yaml:
+    get: 
+      tags:   
+        - openapi
+      summary: Get OpenAPI 3.0 YAML 
+      description: Get OpenAPI 3.0 YAML-file
+      operationId: OpenAPIyaml
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "File not found"
+                
 externalDocs:
   description: Find out more about Swedbank an th AnyPay service from a local office or call +46 8 5859000
   url: http://swebank.com
@@ -410,15 +460,14 @@ servers:
   - url: https://api.swedbank.net/anypay/v1
 components:
   schemas:
-    Fxorder:
+    Fxorders:
       type: object
       properties:
-        id:
+        ID:
           type: integer
           format: int64
         FX:
-          type: integer
-          format: int64
+          type: string
         account:
           $ref: "#/components/schemas/Account"
         quantity:
@@ -446,7 +495,7 @@ components:
     User:
       type: object
       properties:
-        id:
+        ID:
           type: integer
           format: int64
         username:
@@ -474,7 +523,7 @@ components:
         - name
         - accountType
       properties:
-        accountId:
+        accountID:
           type: string
         user:
           $ref: "#/components/schemas/User"
@@ -491,20 +540,20 @@ components:
       type: object
       required:
         - name
-        - fromAccountId
-        - toAccountId
+        - fromAccountID
+        - toAccountID
         - value
         - currency
       properties:
-        paymentId:
+        paymentID:
           type: string
         name:
           type: string
         purpose:
           type: string
-        fromAccountId:
+        fromAccountID:
           type: integer
-        toAccountId:
+        toAccountID:
           type: integer
         value:
           type: number
@@ -516,7 +565,7 @@ components:
     Transaction:
       type: object
       properties:
-        transactionId:
+        transactionID:
           type: string
         name:
           type: string
