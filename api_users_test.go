@@ -25,8 +25,8 @@ func TestAddUser(t *testing.T) {
 		body := gin.H{
 			"Username":            "Kalle",
 			"FirstName":           "Carl",
-			"LastName":            "Piper",
-			"Email":               "carl@piper.se",
+			"LastName":            "Karlsson",
+			"Email":               "carl@Karlsson.se",
 			"SocialSecuityNumber": "7001016939",
 			"Phone":               "+462120000",
 		}
