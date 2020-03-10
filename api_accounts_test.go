@@ -11,8 +11,6 @@
 package main
 
 import (
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -34,13 +32,6 @@ func TestAddAccount(t *testing.T) {
 			openapi.AddAccount(tt.args.c)
 		})
 	}
-}
-
-func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
-	req := httptest.NewRequest(method, path, nil)
-	w := httptest.NewRecorder()
-	r.ServeHTTP(w, req)
-	return w
 }
 
 /*

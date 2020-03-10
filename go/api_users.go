@@ -26,8 +26,8 @@ func GetUser(c *gin.Context) {
 	c.String(http.StatusOK, "Get specific User\n")
 }
 
-// GetUses - Get all user IDs that the login has privileges to get
-func GetUses(c *gin.Context) {
+// GetUsers - Get all user IDs that the login has privileges to get
+func GetUsers(c *gin.Context) {
 	c.String(http.StatusOK, "Get list of Users\n")
 }
 

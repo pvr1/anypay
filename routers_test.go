@@ -11,12 +11,22 @@
 package main
 
 import (
+	"io"
+	"net/http"
+	"net/http/httptest"
 	"reflect"
 	"testing"
 
 	"github.com/gin-gonic/gin"
 	openapi "github.com/pvr1/anypay/go"
 )
+
+func performRequest(r http.Handler, method, path string, body io.Reader) *httptest.ResponseRecorder {
+	req := httptest.NewRequest(method, path, body)
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	return w
+}
 
 func TestNewRouter(t *testing.T) {
 	tests := []struct {

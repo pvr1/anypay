@@ -218,10 +218,10 @@ var routes = Routes{
 	},
 
 	{
-		"GetUses",
+		"GetUsers",
 		http.MethodGet,
 		"/anypay/v1/users",
-		GetUses,
+		GetUsers,
 	},
 
 	{

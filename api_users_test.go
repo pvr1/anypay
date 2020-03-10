@@ -11,61 +11,83 @@
 package main
 
 import (
+	"bytes"
+	"net/http"
 	"testing"
 
 	"github.com/gin-gonic/gin"
 	openapi "github.com/pvr1/anypay/go"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAddUser(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.AddUser(tt.args.c)
-		})
-	}
+	/*
+		body := gin.H{
+			"Username":            "Kalle",
+			"FirstName":           "Carl",
+			"LastName":            "Piper",
+			"Email":               "carl@piper.se",
+			"SocialSecuityNumber": "7001016939",
+			"Phone":               "+462120000",
+		}
+	*/
+
+	body := bytes.NewBufferString("Username=Kalle&FirstName=Carl&LastName=Piper&Email=carl@piper.se&SocialSecuityNumber=7001016939&Phone=+462120000")
+
+	router := openapi.NewRouter()
+	w := performRequest(router, "POST", "/anypay/v1/users", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, "hello", value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "User added\n", a)
 }
 
 func TestGetUser(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetUser(tt.args.c)
-		})
-	}
+	/*
+		body := gin.H{
+			"userID": "1",
+		}
+	*/
+
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/users/:userID", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Get specific User\n", a)
 }
 
-func TestGetUses(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetUses(tt.args.c)
-		})
-	}
+func TestGetUsers(t *testing.T) {
+	/*
+		body := gin.H{
+			"": "",
+		}
+	*/
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/users", nil)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	a := w.Body.String()
+	assert.Equal(t, "Get list of Users\n", a)
 }
 
 func TestUpdateUser(t *testing.T) {
