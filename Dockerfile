@@ -1,4 +1,4 @@
-FROM golang:1.13.0 AS builder
+FROM golang:1.14.0 AS builder
  
 # Add all the source code (except what's ignored
 # under `.dockerignore`) to the build context.
