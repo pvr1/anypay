@@ -11,93 +11,105 @@
 package main
 
 import (
+	"bytes"
+	"net/http"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	openapi "github.com/pvr1/anypay/go"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAddFxorder(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.AddFxorder(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "POST", "/anypay/v1/fxorders", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "FX Order place on market place\n", a)
 }
 
 func TestDeleteFxorder(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.DeleteFxorder(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "DELETE", "/anypay/v1/fxorders/1", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "FX Order deleted. You were so close...\n", a)
 }
 
 func TestGetFxorders(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetFxorders(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("")
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/fxorders", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Get list of Payment orders\n", a)
 }
 
 func TestGetFxorder(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetFxorder(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/fxorders/1", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Get specific FX Order status. You are best offer: 100MM EUR/SEK @ 10.53 . \n", a)
 }
 
 func TestUpdateFxorder(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.UpdateFxorder(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "PUT", "/anypay/v1/fxorders", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]stringThere you got your specific transaction
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "FX Order updated.", a)
 }

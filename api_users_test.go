@@ -15,7 +15,6 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	openapi "github.com/pvr1/anypay/go"
 	"github.com/stretchr/testify/assert"
 )
@@ -91,18 +90,20 @@ func TestGetUsers(t *testing.T) {
 }
 
 func TestUpdateUser(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.UpdateUser(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "PUT", "/anypay/v1/users", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]stringThere you got your specific transaction
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "User updated\n", a)
 }

@@ -11,93 +11,105 @@
 package main
 
 import (
+	"bytes"
+	"net/http"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	openapi "github.com/pvr1/anypay/go"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAddPayment(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.AddPayment(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "POST", "/anypay/v1/payments", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Payment order added\n", a)
 }
 
 func TestDeletePayment(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.DeletePayment(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "DELETE", "/anypay/v1/payments/1", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Payment order deleted\n", a)
 }
 
 func TestGetPayment(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetPayment(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/payments/1", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Get specific Payment order\n", a)
 }
 
 func TestGetPayments(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetPayments(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/payments", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Get list of Payment orders\n", a)
 }
 
 func TestUpdatePayment(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.UpdatePayment(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "PUT", "/anypay/v1/payments", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]stringThere you got your specific transaction
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Payment order updated\n", a)
 }

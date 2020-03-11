@@ -11,96 +11,99 @@
 package main
 
 import (
+	"bytes"
+	"net/http"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	openapi "github.com/pvr1/anypay/go"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAddAccount(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.AddAccount(tt.args.c)
-		})
-	}
-}
+	/*
+		body := gin.H{
+			"Username":            "Kalle",
+			"FirstName":           "Carl",
+			"LastName":            "Karlsson",
+			"Email":               "carl@Karlsson.se",
+			"SocialSecuityNumber": "7001016939",
+			"Phone":               "+462120000",
+		}
+	*/
 
-/*
-func TestEngineHandleContext(t *testing.T) {
-	r := gin.New()
-	r.GET("/", func(c *gin.Context) {
-		c.Request.URL.Path = "/anypay/v1/accounts"
-		r.HandleContext(c)
-	})
-	v2 := r.Group("/v2")
-	{
-		v2.GET("/", func(c *gin.Context) {})
-	}
+	body := bytes.NewBufferString("Username=Kalle&FirstName=Carl&LastName=Piper&Email=carl@piper.se&SocialSecuityNumber=7001016939&Phone=+462120000")
 
-	assert.NotPanics(t, func() {
-		w := performRequest(r, "GET", "/anypay/v1/transactions")
-		t.Log(w.Result().Body())
-		assert.Equal(t, 301, w.Code)
-	})
+	router := openapi.NewRouter()
+	w := performRequest(router, "POST", "/anypay/v1/accounts", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, "hello", value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Account added\n", a)
 }
-*/
 
 func TestGetAccount(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetAccount(tt.args.c)
-		})
-	}
+	/*
+		body := gin.H{
+			"userID": "1",
+		}
+	*/
+
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/accounts/1", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "There you got your specific Account\n", a)
 }
 
 func TestGetAccounts(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetAccounts(tt.args.c)
-		})
-	}
+	/*
+		body := gin.H{
+			"": "",
+		}
+	*/
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/accounts", nil)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	a := w.Body.String()
+	assert.Equal(t, "Yep. A list of accounts was delivered. Can you see it?? :-)\n", a)
 }
 
 func TestUpdateAccount(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.UpdateAccount(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "PUT", "/anypay/v1/accounts", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]stringThere you got your specific transaction
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Account updated. Now it belongs to me.\n", a)
 }

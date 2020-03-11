@@ -11,42 +11,48 @@
 package main
 
 import (
+	"bytes"
+	"net/http"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	openapi "github.com/pvr1/anypay/go"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetTransaction(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetTransaction(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/transactions/1", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "There you got your specific transaction\n", a)
 }
 
 func TestGetTransactions(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			openapi.GetTransactions(tt.args.c)
-		})
-	}
+	body := bytes.NewBufferString("userID=1")
+	router := openapi.NewRouter()
+	w := performRequest(router, "GET", "/anypay/v1/transactions", body)
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	/*
+		var response map[string]string
+		err := json.Unmarshal([]byte(w.Body.String()), &response)
+		value, exists := response["hello"]
+		assert.Nil(t, err)
+		assert.True(t, exists)
+		assert.Equal(t, body["hello"], value)
+	*/
+
+	a := w.Body.String()
+	assert.Equal(t, "Get list of Transactions originating from FX Orders and Payments\n", a)
 }
