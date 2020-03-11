@@ -11,8 +11,8 @@ RUN go get github.com/kardianos/govendor
 RUN set -ex && \
 #  export GIN_MODE=release &&\
   cd /go/src/github.com/pvr1/anypay && \
-  CGO_ENABLED=0 govendor init && \
-  CGO_ENABLED=0 govendor fetch +missing && \
+#  CGO_ENABLED=0 govendor init && \
+#  CGO_ENABLED=0 govendor fetch +missing && \
   CGO_ENABLED=0 go build \
         -tags netgo \
         -v -a \
@@ -20,7 +20,10 @@ RUN set -ex && \
   mv ./anypay /usr/bin/anypay
  
 FROM alpine:3.11.3
- 
+
+RUN addgroup -S appgroup && adduser -S app -G appgroup
+USER app
+
 # Retrieve the binary from the previous stage
 COPY --from=builder /usr/bin/anypay /usr/local/bin/anypay
 COPY ./openapi.json /
