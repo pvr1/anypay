@@ -195,7 +195,7 @@ func GetFxorders(c *gin.Context) {
 	reader := kafka.NewReader(config)
 	defer reader.Close()
 
-	log.Debug().Msg("Conected to kafka")
+	log.Debug().Msg("Connected to kafka")
 
 	m, err := reader.ReadMessage(context.Background())
 
