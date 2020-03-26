@@ -44,14 +44,14 @@ build:
     #    code: |
     #      go test ./... 
 
-- internal/docker-build:
-    dockerfile: Dockerfile
-    image-name: my-new-image
+    - internal/docker-build:
+        dockerfile: Dockerfile
+        image-name: my-new-image
 
-deploy:
-  steps:
-    - internal/docker-push:
-        username: $USERNAME
-        password: $PASSWORD
-        tag: linux-amd64
-        repository: pervonrosen/anypay
+    - deploy:
+        steps:
+        - internal/docker-push:
+            username: $USERNAME
+            password: $PASSWORD
+            tag: linux-amd64
+            repository: pervonrosen/anypay
