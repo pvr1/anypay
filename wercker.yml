@@ -57,11 +57,11 @@ deploy:
     steps:
     #Copy binary
     - script:
-        name: copy binary
+        name: copy openapi 
         code: 
-          cp anypay /usr/local/bin/
-          cp openapi.json /
-          cp openapi.yaml /
+          git clone https://github.com/pvr1/anypay.git --depth 1
+          cd pvr1/anypay
+          cp openapi.* /
 
     # use the scratch step to build a container from scratch based on the files present
     - internal/docker-scratch-push:
