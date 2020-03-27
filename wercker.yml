@@ -50,8 +50,6 @@ build:
         name: copy binary
         code: 
           cp anypay "$WERCKER_OUTPUT_DIR"
-          cp openapi.json "$WERCKER_OUTPUT_DIR"
-          cp openapi.yaml "$WERCKER_OUTPUT_DIR"
 
 
 deploy:
@@ -62,8 +60,8 @@ deploy:
         name: copy binary
         code: 
           cp "$WERCKER_OUTPUT_DIR"/anypay /usr/local/bin/
-          cp "$WERCKER_OUTPUT_DIR"/openapi.json /
-          cp "$WERCKER_OUTPUT_DIR"/openapi.yaml /
+          cp ./openapi.json /
+          cp ./openapi.yaml /
 
     # use the scratch step to build a container from scratch based on the files present
     - internal/docker-scratch-push:
