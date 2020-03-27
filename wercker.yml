@@ -43,13 +43,28 @@ build:
     #    name: go test
     #    code: |
     #      go test ./... 
+    
+    #Copy binary
+    - script:
+        name: copy binary
+        code: cp anypay "$WERCKER_OUTPUT_DIR"
 
-    - internal/docker-build:
-        dockerfile: Dockerfile
-        image-name: my-new-image
-
-    - internal/docker-push:
+box: google/golang
+    steps:
+    # use the scratch step to build a container from scratch based on the files present
+    - internal/docker-scratch-push:
         username: $USERNAME
         password: $PASSWORD
+        cmd: ./anypay
         tag: linux-amd64
         repository: pervonrosen/anypay
+
+#    - internal/docker-build:
+#        dockerfile: Dockerfile
+#        image-name: my-new-image
+
+#    - internal/docker-push:
+#        username: $USERNAME
+#        password: $PASSWORD
+#        tag: linux-amd64
+#        repository: pervonrosen/anypay
