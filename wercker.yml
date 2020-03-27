@@ -3,7 +3,7 @@
 # If you want Google's container you would reference google/golang
 # Read more about containers on our dev center
 # https://devcenter.wercker.com/overview-and-core-concepts/containers/
-box: golang
+#box: golang
 # This is the build pipeline. Pipelines are the core of wercker
 # Read more about pipelines on our dev center
 # https://devcenter.wercker.com/development/pipelines/
@@ -17,6 +17,7 @@ box: golang
     # - mongo
     # https://devcenter.wercker.com/administration/services/examples/mongodb/
 build:
+  box: golang
   # The steps that will be executed on build
   # Steps make up the actions in your pipeline
   # Read more about steps on our dev center:
@@ -49,7 +50,8 @@ build:
         name: copy binary
         code: cp anypay "$WERCKER_OUTPUT_DIR"
 
-box: google/golang
+deploy:
+    box: alpine
     steps:
     # use the scratch step to build a container from scratch based on the files present
     - internal/docker-scratch-push:
