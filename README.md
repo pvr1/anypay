@@ -1,4 +1,7 @@
 [![wercker status](https://app.wercker.com/status/7721caa37f6a1ff044fee5b7a1dd734e/s/master "wercker status")](https://app.wercker.com/project/byKey/7721caa37f6a1ff044fee5b7a1dd734e)
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/pvr1/anypay)](https://goreportcard.com/report/github.com/pvr1/anypay)
+
 # AnyPay - a mock payment service for k8s and a API Gateway
 ## AnyPay - a test API to explore APIGee, Ambassador API Edge Stack, CircleCI
 The AnyPay is an experience API amd created by the outsIDe-in method for APIs, following Client Centric Design/Double Diamond methods. 
