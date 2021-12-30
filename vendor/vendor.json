@@ -1,6 +1,19 @@
 {
 	"comment": "",
-	"ignore": "test",
-	"package": [],
+	"ignore": "",
+	"package": [
+		{
+			"checksumSHA1": "QAz1jjQoRzMBrdcQkeparfG6Bnk=",
+			"path": "golang.org/x/crypto",
+			"revision": "e495a2d5b3d3be43468d0ebb413f46eeaedf7eb3",
+			"revisionTime": "2021-11-19T16:10:13Z"
+		},
+		{
+			"checksumSHA1": "PU7kGU0Cka0giDpRpinIkZWZdJE=",
+			"path": "golang.org/x/text",
+			"revision": "18b340fc7af22495828ffbe71e9f9e22583bc7a9",
+			"revisionTime": "2021-10-29T17:32:13Z"
+		}
+	],
 	"rootPath": "github.com/pvr1/anypay"
 }
