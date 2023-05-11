@@ -19,7 +19,7 @@ RUN set -ex && \
         -ldflags '-extldflags "-static"' && \
   mv ./anypay /usr/bin/anypay
  
-FROM alpine:3.17
+FROM alpine:3
 
 RUN addgroup -S appgroup && adduser -S app -G appgroup
 USER app
